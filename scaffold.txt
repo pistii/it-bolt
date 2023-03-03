@@ -1,0 +1,1 @@
+ Scaffold-DbContext "server=localhost;user id=root;database=it_bolt" Pomelo.EntityFrameworkCore.MySql -Context "BoltContext" -ContextDir Data -OutputDir Models -Namespace ItBolt.Model.Entities -DataAnnotations -UseDatabaseNames -Force -NoPluralize

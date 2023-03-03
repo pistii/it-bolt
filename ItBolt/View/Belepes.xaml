@@ -1,0 +1,28 @@
+﻿<Window x:Class="ItBolt.Belepes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItBolt"
+        mc:Ignorable="d"
+        Title="Beléptető rendszer" Height="450" Width="800" Background="Black">
+    <StackPanel>
+        <Label Foreground="#FF78AD45" HorizontalAlignment="Center">BElépés</Label>
+        <Separator></Separator>
+        <Label Content="Felhasználó" Foreground="Wheat"></Label>
+        <TextBox Name="felhsznalo" Background="White" Foreground="Black" FontSize="18" Height="57" Width="695" ></TextBox>
+        <Label Content="Jelszó" Foreground="Wheat"></Label>
+        <TextBox Name="jelszo" Background="White" Foreground="Black" FontSize="18" RenderTransformOrigin="0.5,0.5" Height="49" Width="675" >
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.422"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform></TextBox>
+        <Button x:Name="belepesgomb" Click="submit_click" Content="belepes" Margin="50" Height="94" Width="385"/>
+
+    </StackPanel>
+
+</Window>

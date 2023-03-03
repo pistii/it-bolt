@@ -1,0 +1,58 @@
+﻿<Window x:Class="ItBolt.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItBolt.WPF"
+        xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Background="Transparent"
+        AllowsTransparency="False">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Border CornerRadius="30"
+            BorderBrush="MediumAquamarine"
+            Background="#1b1448"
+            BorderThickness="5">
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border  CornerRadius="10" Background="#1b6874" Margin="10,1,10,0">
+                <Menu Margin="30,0,30,0" Background="Transparent">
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal"/>
+
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Header="Belépés"  Padding="10,0,10,0" BorderThickness="2" FontWeight="DemiBold" />
+                    <MenuItem Header="Új..."  Padding="10,0,10,0">
+                        <MenuItem Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
+                        <MenuItem Header="Raktár" x:Name="UjRaktar" />
+                        <MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />
+                        <MenuItem Header="Eszköz" x:Name="UjEszkoz"/>
+                        <MenuItem Header="Gyártó" x:Name="UjGyarto" />
+                        <MenuItem Header="Kategória" x:Name="UjKategoria" />
+                        <MenuItem Header="Vásárló" x:Name="UjVasarlo" />
+                        <MenuItem Header="Vásárlás" x:Name="UjVasarlas" />
+                    </MenuItem>
+
+                    <MenuItem Header="Kimutatás..."  Padding="10,0,10,0">
+                        <MenuItem Header="Eszközökről" />
+                        <MenuItem Header="Boltokról" />
+                        <MenuItem Header="Vásárlókról" />
+                        <MenuItem Header="Raktárakról" />
+                    </MenuItem>
+                </Menu>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
