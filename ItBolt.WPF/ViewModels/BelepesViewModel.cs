@@ -1,26 +1,20 @@
-﻿using ApiClient.Repositories;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ItBolt.Model.Entities;
-using ItBolt.WPF;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using ItBolt.WPF.Commands;
 
 namespace ItBolt.WPF.ViewModels
 {
-    public class BelepesViewModel
+    public class BelepesViewModel : ObservableObject
     {
-        public BelepesViewModel()
-        { }
 
-        private ObservableCollection<Belepes> _belepes = new();
-
-        public ObservableCollection<Belepes> Belepes
+        private ObservableCollection<Felhasznalo> _belepes = new();
+        public ObservableCollection<Felhasznalo> Belepes
         {
             get { return _belepes; }
-            set
-            { //SetProperty(ref _belepes, value); }
-            }
+            set { SetProperty(ref _belepes, value); }
         }
+
 
     }
 }

@@ -5,7 +5,7 @@ namespace ItBolt.Model.DTOs
 {
     public class TableDTO<T>
     {
-        public TableDTO(int totalItems, List<T>? data)
+        public TableDTO(List<T>? data, int totalItems)
         {
             TotalItems = totalItems;
             Data = data;

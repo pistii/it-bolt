@@ -10,7 +10,7 @@ namespace ItBolt.Model.Entities
     {
         public Bolt()
         {
-            leltarieszkoz = new HashSet<Leltarieszkoz>();
+            //leltarieszkoz = new HashSet<Leltarieszkoz>();
         }
 
         [Key]
@@ -27,9 +27,13 @@ namespace ItBolt.Model.Entities
         [StringLength(15)]
         public string? nyitvatartasi_ido { get; set; }
 
-        [InverseProperty("bolt")]
+
+        [ForeignKey("raktarID")]
+        [InverseProperty("raktarak")]
         public virtual Raktar? raktar { get; set; }
-        [InverseProperty("bolt")]
-        public virtual ICollection<Leltarieszkoz> leltarieszkoz { get; set; }
+
+
+
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 
-namespace JarmuKolcsonzo.WPF.Commands
+namespace ItBolt.WPF.Commands
 {
     public interface IEditCommands<T>
     {

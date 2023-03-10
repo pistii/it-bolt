@@ -2,6 +2,7 @@
 using ItBolt.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ItBolt.Model.DTOs;
 
 namespace ITBolt.API.Controllers
 {
@@ -15,6 +16,60 @@ namespace ITBolt.API.Controllers
         public BoltokController(ITBoltContext context)
         {
             _context = context;
+        }
+
+        // GET: api/Boltok
+        [HttpGet]
+        public async Task<TableDTO<Bolt>> GetAll(
+            int page = 1,
+            int itemsPerPage = 20,
+            string? search = null,
+            string? sortBy = null,
+            bool ascending = true)
+        {
+            var query = _context.bolt.Include(x => x.raktar).OrderBy(x => x.bolt_neve).AsQueryable();
+            // Keresés
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                // Ha a keresési kulcsszó szám
+                int.TryParse(search, out int dij);
+                // Ha dátum
+                DateTime.TryParse(search, out DateTime datum);
+
+                query = query.Where(x =>
+                    x.bolt_neve.ToLower().Contains(search) ||
+                    x.bolt_cime.Equals(dij));
+            }
+
+            // Sorbarendezés
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                switch (sortBy)
+                {
+                    
+                    case "bolt_cime":
+                        query = ascending ? query.OrderBy(x => x.bolt_cime) : query.OrderByDescending(x => x.bolt_cime);
+                        break;
+                    case "nyitvatartasi_ido":
+                        query = ascending ? query.OrderBy(x => x.nyitvatartasi_ido) : query.OrderByDescending(x => x.nyitvatartasi_ido);
+                        break;
+                    default:
+                        query = ascending ? query.OrderBy(x => x.bolt_neve) : query.OrderByDescending(x => x.bolt_neve);
+                        break;
+                }
+            }
+
+            // Összes találat kiszámítása
+            int totalItems = await query.CountAsync();
+
+            // Oldaltördelés
+            if (page + itemsPerPage > 0)
+            {
+                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+            }
+            var data = await query.ToListAsync();
+            return new TableDTO<Bolt>(data, totalItems);
         }
 
         // GET: /api/boltok/randomAZ1

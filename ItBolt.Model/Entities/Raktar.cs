@@ -9,7 +9,7 @@ namespace ItBolt.Model.Entities
     {
         public Raktar()
         {
-            bolt = new HashSet<Bolt>();
+            raktarak = new HashSet<Bolt>();
         }
 
         [Key]
@@ -22,6 +22,6 @@ namespace ItBolt.Model.Entities
         public DateOnly? Berlesi_ido { get; set; }
 
         [InverseProperty("raktar")]
-        public virtual ICollection<Bolt> bolt { get; set; }
+        public virtual ICollection<Bolt> raktarak { get; set; }
     }
 }

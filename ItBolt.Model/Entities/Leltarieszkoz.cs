@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ItBolt.Model.Entities
 {
+    [Table("leltarieszkozok")]
     public partial class Leltarieszkoz
     {
         [Key]
@@ -16,9 +17,6 @@ namespace ItBolt.Model.Entities
         [StringLength(25)]
         public string? leltariszam { get; set; }
 
-        [JsonIgnore]
-        [ForeignKey("boltID")]
-        [InverseProperty("leltarieszkoz")]
-        public virtual Bolt? bolt { get; set; }
+
     }
 }

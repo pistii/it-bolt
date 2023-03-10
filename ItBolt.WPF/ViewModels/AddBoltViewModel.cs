@@ -4,7 +4,7 @@ using ApiClient.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ItBolt.Model.Entities;
-using JarmuKolcsonzo.WPF.Commands;
+using ItBolt.WPF.Commands;
 
 namespace ItBolt.WPF.ViewModels
 {
@@ -32,8 +32,7 @@ namespace ItBolt.WPF.ViewModels
         protected override async Task LoadData()
         {
             var boltok = await _boltRepo.GetAllAsync(page, ItemsPerPage, SearchKey, SortBy, ascending);
-            TotalItems = boltok.TotalItems;
-            Boltok = new ObservableCollection<Bolt>(boltok.Data);
+            
         }
 
 

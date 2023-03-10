@@ -24,23 +24,23 @@ namespace ItBolt.WPF.ViewModels
             UpdateViewCommand = new RelayCommand<object>(e => Execute(e));
             // Required = nem lehet null értékű
 
-            //SelectedViewModel = App.Current.Services.GetRequiredService<AddBoltViewModel>();
+            SelectedViewModel = App.Current.Services.GetRequiredService<BelepesViewModel>();
+            //SelectedViewModel = App.Current.Services.GetRequiredService<BoltKimutatasViewModel>();
         }
 
         public void Execute(object parameter)
         {
             switch (parameter.ToString())
             {
-                case "Belepes":
-                    //SelectedViewModel = new BelepesViewModel();
-                    //SelectedViewModel = 
-                    App.Current.Services.
-                    GetRequiredService<BelepesViewModel>();
-                    break;
                 case "AddBolt":
                     //SelectedViewModel = new AddBoltViewModel();
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<AddBoltViewModel>();
+                    break;
+                case "BoltKimutatas":
+                    //SelectedViewModel = new AddBoltViewModel();
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<BoltKimutatasViewModel>();
                     break;
                 default:
                     break;

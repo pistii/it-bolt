@@ -8,16 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Page Remove="Views\BelepesView.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\BelepesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
   </ItemGroup>
@@ -25,12 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ApiClient\ApiClient.csproj" />
     <ProjectReference Include="..\ItBolt.Model\ItBolt.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\BelepesView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

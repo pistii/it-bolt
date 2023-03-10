@@ -25,31 +25,23 @@ namespace ItBolt.WPF
         {
             var services = new ServiceCollection();
             services.AddSingleton<MainViewModel>();
-            
             services.AddSingleton<BelepesViewModel>();
-            services.AddSingleton<AddBoltViewModel>();
+
             services.AddTransient<IPagerRepository<Bolt>, PagerRepository<Bolt>>(x =>
             {
-                return new PagerRepository<Bolt>("api/Bolt");
+                return new PagerRepository<Bolt>("api/Boltok");
             });
-            /*
-            services.AddTransient<IPagerRepository<Felhasznalo>, PagerAPIRepository<Felhasznalo>>(x =>
+            //services.AddTransient<IPagerRepository<Eszkoz>, PagerRepository<Eszkoz>>(x =>
+            //{
+            //    return new PagerRepository<Eszkoz>("api/Eszkozok");
+            //});
+
+            services.AddTransient<IGenericRepository<Raktar>, GenericAPIRepository<Raktar>>(x =>
             {
-                return new PagerAPIRepository<Felhasznalo>("api/felhasznalo");
+                return new PagerRepository<Raktar>("api/Raktar");
             });
-            
-            services.AddTransient<IGenericRepository<JarmuTipus>, GenericAPIRepository<JarmuTipus>>(x =>
-            {
-                return new PagerAPIRepository<JarmuTipus>("api/JarmuTipusok");
-            });
-            services.AddTransient<IPagerRepository<Ugyfel>, PagerAPIRepository<Ugyfel>>(x =>
-            {
-                return new PagerAPIRepository<Ugyfel>("api/Ugyfelek");
-            });
-            
-            services.AddTransient<JarmuvekViewModel>();
-            services.AddTransient<UgyfelekViewModel>();
-            */
+            services.AddTransient<AddBoltViewModel>();
+            services.AddTransient<BoltKimutatasViewModel>();
             return services.BuildServiceProvider();
         }
     }

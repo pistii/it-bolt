@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ItBolt.WPF.ViewModels
+namespace ItBolt.WPF.Views
 {
     /// <summary>
     /// Interaction logic for AddBoltView.xaml

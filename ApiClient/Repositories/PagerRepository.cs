@@ -9,6 +9,7 @@ namespace ApiClient.Repositories
         {
         }
 
+        
         public async Task<TableDTO<T>> GetAllAsync(int page = 1, int itemsPerPage = 20, string? search = null, string? sortBy = null, bool ascending = true)
         {
             // Hozzáadja a query paramétereket

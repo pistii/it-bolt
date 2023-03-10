@@ -1,25 +1,15 @@
-﻿
-using System.Windows;
-namespace ItBolt
+﻿using System.Windows.Controls;
+
+namespace ItBolt.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Belepes.xaml
+    /// Interaction logic for BelepesView.xaml
     /// </summary>
-    public partial class Belepes : Window
+    public partial class BelepesView : UserControl
     {
-      
-        public Belepes()
+        public BelepesView()
         {
-            //InitializeComponent();
-        }
-         
-
-        private void submit_click(object sender, RoutedEventArgs e)
-        {
-            
-
-
-
+            InitializeComponent();
         }
     }
 }

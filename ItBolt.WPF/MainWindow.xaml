@@ -6,16 +6,22 @@
         xmlns:local="clr-namespace:ItBolt.WPF"
         xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="Transparent"
-        AllowsTransparency="False">
+        Title="IT Bolt App" Height="450" Width="800"
+        Background="AliceBlue"
+        AllowsTransparency="False"
+        >
+
+    <!--Background="Transparent"
+        AllowsTransparency="False"-->
+
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    <Border CornerRadius="30"
+    <Border>
+        <!--CornerRadius="30"
             BorderBrush="MediumAquamarine"
             Background="#1b1448"
-            BorderThickness="5">
+            BorderThickness="5"-->
 
 
         <Grid>
@@ -26,6 +32,7 @@
 
             <Border  CornerRadius="10" Background="#1b6874" Margin="10,1,10,0">
                 <Menu Margin="30,0,30,0" Background="Transparent">
+                    
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel Orientation="Horizontal"/>
@@ -46,13 +53,16 @@
 
                     <MenuItem Header="Kimutatás..."  Padding="10,0,10,0">
                         <MenuItem Header="Eszközökről" />
-                        <MenuItem Header="Boltokról" />
+                        <MenuItem Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
                         <MenuItem Header="Vásárlókról" />
                         <MenuItem Header="Raktárakról" />
                     </MenuItem>
                 </Menu>
+
             </Border>
 
+            <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
         </Grid>
     </Border>
+
 </Window>

@@ -103,7 +103,7 @@ namespace ITBolt.API.Data
             modelBuilder.Entity<Bolt>(entity =>
             {
                 entity.HasOne(d => d.raktar)
-                    .WithMany(p => p.bolt)
+                    .WithMany(p => p.raktarak)
                     .HasForeignKey(d => d.raktarID)
                     .HasConstraintName("bolt_ibfk_1");
             });
@@ -127,11 +127,11 @@ namespace ITBolt.API.Data
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-                entity.HasOne(d => d.bolt)
-                    .WithMany(p => p.leltarieszkoz)
-                    .HasForeignKey(d => d.boltID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("leltarieszkoz_ibfk_1");
+                //entity.HasOne(d => d.bolt)
+                //    .WithMany(p => p.leltarieszkoz)
+                //    .HasForeignKey(d => d.boltID)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("leltarieszkoz_ibfk_1");
             });
 
             modelBuilder.Entity<Vasarlas>(entity =>
