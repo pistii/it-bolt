@@ -9,11 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApiClient\ApiClient.csproj" />
+    <ProjectReference Include="..\ITBolt.API\ITBolt.API.csproj" />
     <ProjectReference Include="..\ItBolt.Model\ItBolt.Model.csproj" />
   </ItemGroup>
 

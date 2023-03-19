@@ -12,12 +12,14 @@ namespace ItBolt.WPF.ViewModels
     {
         private IPagerRepository<Bolt> _boltRepo;
 
-        private ObservableCollection<Bolt> _boltok = new();
-        public ObservableCollection<Bolt> Boltok
-        {
-            get { return _boltok; }
-            set { SetProperty(ref _boltok, value); }
-        }
+        public IAsyncRelayCommand<Bolt> SaveCmdAsync { get; }
+
+        public IAsyncRelayCommand<Bolt> DeleteCmdAsync { get; }
+
+        public IRelayCommand NewCmd { get; }
+
+
+
 
         public AddBoltViewModel(IPagerRepository<Bolt> boltRepo)
         {
@@ -35,6 +37,12 @@ namespace ItBolt.WPF.ViewModels
             
         }
 
+        private ObservableCollection<Bolt> _boltok = new();
+        public ObservableCollection<Bolt> Boltok
+        {
+            get { return _boltok; }
+            set { SetProperty(ref _boltok, value); }
+        }
 
         private Bolt _selectedBolt = new();
         public Bolt SelectedBolt
@@ -52,13 +60,6 @@ namespace ItBolt.WPF.ViewModels
             SelectedBolt = new Bolt();
         }
 
-        public IAsyncRelayCommand<Bolt> SaveCmdAsync { get; }
-
-        public IAsyncRelayCommand<Bolt> DeleteCmdAsync { get; }
-
-        public IRelayCommand NewCmd { get; }
-
-
         private async Task SaveAsync(Bolt bolt)
         {
 
@@ -68,6 +69,7 @@ namespace ItBolt.WPF.ViewModels
                 if (exists)
                 {
                     await _boltRepo.UpdateAsync(bolt.boltID, bolt);
+                    
                 }
                 else
                 {

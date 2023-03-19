@@ -16,15 +16,16 @@ namespace ITBolt.API.Data
         {
         }
 
-        public virtual DbSet<Felhasznalo> felhasznalo { get; set; } = null!;
+        public virtual DbSet<Felhasznalo> felhasznalo { get; set; }
         public virtual DbSet<Bolt> bolt { get; set; } = null!;
-        public virtual DbSet<Eszkoz> eszkoz { get; set; } = null!;
+        public virtual DbSet<Eszkoz> eszkoz { get; set; }
         public virtual DbSet<Gyarto> gyarto { get; set; } = null!;
         public virtual DbSet<Kategoria> kategoria { get; set; } = null!;
-        public virtual DbSet<Leltarieszkoz> leltarieszkoz { get; set; } = null!;
+        public virtual DbSet<Leltarieszkoz> leltarieszkoz { get; set; }
         public virtual DbSet<Raktar> raktar { get; set; } = null!;
         public virtual DbSet<Vasarlas> vasarlas { get; set; } = null!;
         public virtual DbSet<Vasarlo> vasarlo { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -148,7 +149,6 @@ namespace ITBolt.API.Data
             });
 
             
-
             OnModelCreatingPartial(modelBuilder);
         }
 

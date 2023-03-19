@@ -50,6 +50,7 @@ namespace ItBolt.WPF.ViewModels
             NewCmd = new RelayCommand(New);
             SaveCmdAsync = new AsyncRelayCommand<Bolt>(bolt => SaveAsync(bolt));
             DeleteCmdAsync = new AsyncRelayCommand<Bolt>(bolt => DeleteAsync(bolt), CanDelete);
+
             Task.Run(LoadData);
         }
 
@@ -59,7 +60,7 @@ namespace ItBolt.WPF.ViewModels
             TotalItems = boltok.TotalItems;
             Boltok = new ObservableCollection<Bolt>(boltok.Data);
             var raktarak = await _raktarRepo.GetAllAsync();
-            Raktarak = new ObservableCollection<Raktar>(Raktarak);
+            Raktarak = new ObservableCollection<Raktar>(raktarak); //Raktarak volt
 
         }
 

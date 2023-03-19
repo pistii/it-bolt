@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:ItBolt.WPF.Views"
                     xmlns:viewmodels="clr-namespace:ItBolt.WPF.ViewModels">
+    <!--<DataTemplate DataType="{x:Type viewmodels:BelepesViewModel}">
+        <views:BelepesView/>
+    </DataTemplate>-->
+
     <DataTemplate DataType="{x:Type viewmodels:BelepesViewModel}">
         <views:BelepesView/>
     </DataTemplate>
@@ -11,5 +15,7 @@
     <DataTemplate DataType="{x:Type viewmodels:AddBoltViewModel}">
         <views:AddBoltView/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type viewmodels:UdvozloViewModel}">
+        <views:UdvozloView/>
+    </DataTemplate>
 </ResourceDictionary>

@@ -4,6 +4,7 @@ using ItBolt.Model.Entities;
 using System.Windows;
 using ItBolt.WPF.ViewModels;
 using ApiClient.Repositories;
+using ItBolt.WPF.Views;
 
 namespace ItBolt.WPF
 {
@@ -21,27 +22,49 @@ namespace ItBolt.WPF
         public new static App Current => (App)Application.Current;
         public IServiceProvider Services { get; }
 
+        protected override async void OnStartup(StartupEventArgs startupEventArgs)
+        {
+            base.OnStartup(startupEventArgs);
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<BelepesViewModel>();
+            services.AddSingleton<AddBoltViewModel>();
+            services.AddTransient<BoltKimutatasViewModel>();
+            services.AddTransient<BoltKimutatasView>();
+            services.AddTransient<AddBoltView>();
+            services.AddTransient<UdvozloViewModel>();
+
+        }
+
         private static IServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<MainViewModel>();
             services.AddSingleton<BelepesViewModel>();
+            services.AddSingleton<AddBoltViewModel>();
+            services.AddTransient<BoltKimutatasViewModel>();
+            services.AddTransient<BoltKimutatasView>();
+            services.AddTransient<AddBoltView>();
+
+            services.AddTransient<UdvozloViewModel>();
+            services.AddSingleton<MainViewModel>();
+
+
+            services.AddTransient<ILoginRepository<Felhasznalo>, LoginRepository<Felhasznalo>>(x =>
+            {
+                return new LoginRepository<Felhasznalo>("api/Felhasznalo");
+            });
 
             services.AddTransient<IPagerRepository<Bolt>, PagerRepository<Bolt>>(x =>
             {
                 return new PagerRepository<Bolt>("api/Boltok");
             });
-            //services.AddTransient<IPagerRepository<Eszkoz>, PagerRepository<Eszkoz>>(x =>
-            //{
-            //    return new PagerRepository<Eszkoz>("api/Eszkozok");
-            //});
+
 
             services.AddTransient<IGenericRepository<Raktar>, GenericAPIRepository<Raktar>>(x =>
             {
                 return new PagerRepository<Raktar>("api/Raktar");
             });
-            services.AddTransient<AddBoltViewModel>();
-            services.AddTransient<BoltKimutatasViewModel>();
+
+
             return services.BuildServiceProvider();
         }
     }

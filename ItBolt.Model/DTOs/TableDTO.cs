@@ -11,6 +11,7 @@ namespace ItBolt.Model.DTOs
             Data = data;
         }
 
+
         public int TotalItems { get; set; }
 
         public List<T>? Data { get; set; }

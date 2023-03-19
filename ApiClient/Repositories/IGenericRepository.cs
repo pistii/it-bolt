@@ -8,6 +8,11 @@
         /// <returns></returns>
         Task<List<T>> GetAllAsync();
         /// <summary>
+        /// Lekérdez egy elemet név és jelszó alapján
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> ExistsByNameAndPw(string nev, string pw);
+        /// <summary>
         /// Lekérdez egy elemet azonosító alapján
         /// </summary>
         /// <param name="id"></param>

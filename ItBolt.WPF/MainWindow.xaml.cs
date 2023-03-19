@@ -1,5 +1,8 @@
 ﻿
+using ItBolt.WPF.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ItBolt.WPF
 {
@@ -8,9 +11,15 @@ namespace ItBolt.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
-            InitializeComponent();
+           
+            this.InitializeComponent();
+            DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
+
         }
+
+
     }
 }

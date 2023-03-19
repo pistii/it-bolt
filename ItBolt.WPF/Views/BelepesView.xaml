@@ -3,24 +3,106 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ItBolt.WPF.Views"
-        mc:Ignorable="d"
-         Height="450" Width="800" Background="AliceBlue">
-    <StackPanel>
-        <Label Foreground="Black" HorizontalAlignment="Center" FontSize="30">Belépés</Label>
-        <Separator Margin="0,0,0,50"/>
-        <Label Content="Belépési név" Foreground="Black"  FontWeight="Bold" HorizontalAlignment="Center" />
-        <Border CornerRadius="10" Background="#c0ebed" Margin="0,10,0,10" Height="30" Width="300" BorderThickness="1" BorderBrush="Blue">
-            <TextBox Background="Transparent" Foreground="Black" FontSize="18" Height="30" Width="250" BorderThickness="0"/>
-        </Border>
-        <Label Content="Jelszó" Foreground="Black" 
+        xmlns:local="clr-namespace:ItBolt.WPF.Views" 
+        xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
+        xmlns:validation="clr-namespace:ItBolt.WPF.Validators" 
+        xmlns:fa="http://schemas.fontawesome.io/icons/" d:DataContext="{d:DesignInstance Type=vm:BelepesViewModel}"
+             mc:Ignorable="d"
+        Height="450" Width="800" Background="AliceBlue"
+             
+        >
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,10,0">
+            <Label Foreground="Black" HorizontalAlignment="Center" FontSize="30">Belépés</Label>
+            <Separator Margin="0,0,0,50"/>
+            <Label Content="Belépési név" Foreground="Black"  FontWeight="Bold" HorizontalAlignment="Center"  />
+            <Border CornerRadius="10" Background="#c0ebed"
+                    Margin="0,10,0,10" 
+                    Height="30" Width="300"
+                    BorderThickness="1" BorderBrush="Blue">
+                <TextBox Background="Transparent" Foreground="Black"
+                         FontSize="18" Height="30" Width="250"
+                         BorderThickness="0" Name="Nev"
+                         Validation.ErrorTemplate="{StaticResource validationTemplate2}" MaxLength="25">
+                    <Binding Path="Nev" 
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules>
+                            <validation:LoginValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Border>
+            <Label Content="Jelszó" Foreground="Black" 
                FontWeight="Bold" HorizontalAlignment="Center"/>
-        <Border CornerRadius="10" Background="#c0ebed" Margin="0,10,0,10" Height="30" Width="300" BorderThickness="1" BorderBrush="Blue">
-            <TextBox Background="Transparent" Foreground="Black" FontSize="18" Height="30" Width="250" BorderThickness="0"/>
-        </Border>
-        <Border CornerRadius="10" Background="#45b563" Margin="0,40,0,0" Height="30" Width="250" >
-            <Button Content="Belépés" BorderBrush="Transparent" Background="Transparent" Width="230" Height="25" />
-        </Border>
-    </StackPanel>
+            <Border CornerRadius="10" Background="#c0ebed" 
+                    Margin="0,10,0,10" 
+                    Height="30" Width="300"
+                    BorderThickness="1" BorderBrush="Blue">
+                <!--<TextBox Background="Transparent" 
+                         Foreground="Black" 
+                         FontSize="18" 
+                         Height="30" Width="250" 
+                         BorderThickness="0" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate2}">
+                    <Binding Path="Jelszo" UpdateSourceTrigger="PropertyChanged"  ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules>
+                            <validation:LoginValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>-->
+                <TextBox 
+                         Background="Transparent" 
+                         Foreground="Black" 
+                         FontSize="18" 
+                         Height="30" Width="250" 
+                         BorderThickness="0" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate2}"
+                         x:Name="PasswordBox" 
+                         MaxLength="25">
+                    <Binding Path="Jelszo" 
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules>
+                            <validation:LoginValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+            </Border>
+
+
+
+            <fa:ImageAwesome Icon="Spinner" Spin="{Binding SpinnerShouldSpin}" SpinDuration="3" Width="20" Height="20" Visibility="{Binding ShowSpinner}" />
+
+            <Border CornerRadius="10" Margin="0,40,0,0" Height="30" Width="250" BorderBrush="Navy" BorderThickness="1" >
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,0.8">
+                        <GradientStop Color="LightCyan" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+
+                <Button Style="{StaticResource BelepesButton}" Command="{Binding UpdateViewCommand}"
+                    CommandParameter="LogIn" Content="Belépés" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Width="230" Height="25" >
+
+                    <!--<Binding Path="DataContext.UpdateViewModel, RelativeSource={RelativeSource AncestorType=Window}"></Binding>-->
+                    <!--Command="{Binding DataContext.UpdateViewCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                    CommandParameter="LogIn"-->
+                </Button>
+            </Border>
+
+            <TextBlock Text="Hibás felhasználónév vagy jelszó." FontSize="12" 
+                       Validation.ErrorTemplate="{StaticResource validationTemplate2}"
+                       Background="OrangeRed"
+                       Visibility="{Binding ShowResult}"/>
+        </StackPanel>
+    </Grid>
 
 </UserControl>

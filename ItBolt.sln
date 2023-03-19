@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItBolt.WPF", "ItBolt.WPF\It
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiClient", "ApiClient\ApiClient.csproj", "{F5842F69-E519-4868-B90A-1E4D5CD2A328}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItBolt.WPFTests", "ItBolt.WPFTests\ItBolt.WPFTests.csproj", "{9ACAF842-0F44-4B8E-8EAA-C283A9E6C8AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ACAF842-0F44-4B8E-8EAA-C283A9E6C8AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ACAF842-0F44-4B8E-8EAA-C283A9E6C8AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ACAF842-0F44-4B8E-8EAA-C283A9E6C8AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ACAF842-0F44-4B8E-8EAA-C283A9E6C8AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

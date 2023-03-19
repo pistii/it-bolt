@@ -1,4 +1,5 @@
 ﻿using ItBolt.WPF.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel;
 using System.Windows.Controls;
 

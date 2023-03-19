@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ItBolt.Model;
+﻿using ITBolt.API.Data;
 using ItBolt.Model.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ItBolt.Model.DTOs;
-using ITBolt.API.Data;
 
 namespace ITBolt.API.Controllers
 {
@@ -22,6 +16,38 @@ namespace ITBolt.API.Controllers
         public FelhasznaloController(ITBoltContext context)
         {
             _context = context;
+        }
+
+
+        //GET: api/Felhasznalo
+        //[HttpGet]
+        // public Task<TableDTO<Felhasznalo>> GetAll(
+        //     string nev = "",
+        //     string jelszo = "")
+        // {
+        //     var query = _context.felhasznalo.Where(query => query.nev == nev && query.jelszo == jelszo);
+
+
+        //     List<Felhasznalo> data = new List<Felhasznalo>();
+
+        //     data = query.ToList();
+
+        //     return Task.FromResult(new TableDTO<Felhasznalo>(data, 1));
+        // }
+
+        // GET: api/Felhasznalo
+        [HttpGet]
+        public async Task<IActionResult> GetAll(
+            string nev = "",
+            string jelszo = "")
+        {
+            var query = _context.felhasznalo.Any(q => q.nev == nev && q.jelszo == jelszo);
+
+            if (!query)
+            {
+                return NotFound();
+            }
+            return Ok(query);
         }
 
         // GET: api/Felhasznalo/1

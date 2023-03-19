@@ -1,6 +1,7 @@
 using ItBolt.Model.Entities;
 using ITBolt.API.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 
 namespace ITBolt.API
@@ -20,14 +21,24 @@ namespace ITBolt.API
                     builder.Configuration.GetConnectionString("ITDB"),
                     ServerVersion.Parse("10.4.6-mariadb")));
 
-            var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:5173");
+                                  });
+            });
+            builder.Services.AddControllers();
 
+            var app = builder.Build();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }

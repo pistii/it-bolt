@@ -13,6 +13,12 @@ namespace ApiClient.Repositories
             return await client.GetFromJsonAsync<List<T>>(_path);
         }
 
+        public async Task<bool> ExistsByNameAndPw(string name, string pw)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(_path + "/?nev=" + name + "&jelszo=" + pw);
+            return responseMessage.IsSuccessStatusCode;
+        }
+
         public async Task<T> GetByIdAsync(string id)
         {
             return await client.GetFromJsonAsync<T>(_path + "/" + id);

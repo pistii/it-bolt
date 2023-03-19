@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using ItBolt.WPF.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Controls;
 
 namespace ItBolt.WPF.Views
 {
@@ -9,7 +11,9 @@ namespace ItBolt.WPF.Views
     {
         public AddBoltView()
         {
+
             InitializeComponent();
+            //DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
         }
     }
 }

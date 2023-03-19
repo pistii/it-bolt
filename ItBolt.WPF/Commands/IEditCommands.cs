@@ -7,5 +7,6 @@ namespace ItBolt.WPF.Commands
         IRelayCommand NewCmd { get; }
         IAsyncRelayCommand<T> SaveCmdAsync { get; }
         IAsyncRelayCommand<T> DeleteCmdAsync { get; }
+
     }
 }

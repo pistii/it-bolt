@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ItBolt.WPF"
         xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
         mc:Ignorable="d"
-        Title="IT Bolt App" Height="450" Width="800"
+        Title="IT Bolt App" Height="600" Width="1200"
+        ResizeMode="NoResize"
         Background="AliceBlue"
         AllowsTransparency="False"
         >
@@ -14,9 +15,7 @@
     <!--Background="Transparent"
         AllowsTransparency="False"-->
 
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+    
     <Border>
         <!--CornerRadius="30"
             BorderBrush="MediumAquamarine"
@@ -39,8 +38,18 @@
 
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
-                    <MenuItem Header="Belépés"  Padding="10,0,10,0" BorderThickness="2" FontWeight="DemiBold" />
-                    <MenuItem Header="Új..."  Padding="10,0,10,0">
+                    <MenuItem Header="{Binding Log}" 
+                              Command="{Binding UpdateViewCommand}"
+                              CommandParameter="LogOut" 
+                              Padding="10,0,10,0" 
+                              BorderThickness="2" 
+                              FontWeight="DemiBold" 
+                              ItemsSource="{Binding SelectedViewModel, 
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged}" >
+                    </MenuItem>
+                    <MenuItem Header="Új..."  Padding="10,0,10,0" 
+                              IsEnabled="{Binding EnabledButton}">
                         <MenuItem Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
                         <MenuItem Header="Raktár" x:Name="UjRaktar" />
                         <MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />
@@ -51,7 +60,7 @@
                         <MenuItem Header="Vásárlás" x:Name="UjVasarlas" />
                     </MenuItem>
 
-                    <MenuItem Header="Kimutatás..."  Padding="10,0,10,0">
+                    <MenuItem Header="Kimutatás..."  Padding="10,0,10,0" IsEnabled="{Binding EnabledButton}">
                         <MenuItem Header="Eszközökről" />
                         <MenuItem Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
                         <MenuItem Header="Vásárlókról" />
@@ -65,4 +74,7 @@
         </Grid>
     </Border>
 
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
 </Window>
