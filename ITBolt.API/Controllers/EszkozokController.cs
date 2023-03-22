@@ -20,7 +20,7 @@ namespace ITBolt.API.Controllers
 
         // GET: api/Eszkozok/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Eszkoz>> GetEszkozok(string id)
+        public async Task<ActionResult<Eszkoz>> GetEszkozok(int id)
         {
             var eszkoz = await _context.eszkoz.FindAsync(id);
 
@@ -31,10 +31,10 @@ namespace ITBolt.API.Controllers
             return eszkoz;
         }
 
+        //TODO: POST METHOD
         // PUT: /api/eszkozok/1
         [HttpPut("{eszkozID}")]
-
-        public async Task<IActionResult> PutEszkozok(string eszkozID, Eszkoz eszkoz)
+        public async Task<IActionResult> PutEszkozok(int eszkozID, Eszkoz eszkoz)
         {
             if (eszkoz.eszkozID != eszkozID)
             {
@@ -73,11 +73,11 @@ namespace ITBolt.API.Controllers
         }
 
 
-        // DELETE: /api/eszkozok/eszkozID123
+        // DELETE: /api/eszkozok/2
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string eszkozID)
+        public async Task<IActionResult> DeleteEszkoz(int id)
         {
-            var eszkoz = await _context.eszkoz.FindAsync(eszkozID);
+            var eszkoz = await _context.eszkoz.FindAsync(id);
             if (eszkoz == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool EszkozExists(string eszkozID)
+        private bool EszkozExists(int eszkozID)
         {
             return _context.eszkoz.Any(e => e.eszkozID == eszkozID);
         }

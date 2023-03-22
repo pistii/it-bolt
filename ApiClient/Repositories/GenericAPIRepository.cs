@@ -19,12 +19,19 @@ namespace ApiClient.Repositories
             return responseMessage.IsSuccessStatusCode;
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<bool> ExistsByNameAsync(string name)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(_path + "/" + name);
+            return responseMessage.IsSuccessStatusCode;
+        }
+
+
+        public async Task<T> GetByIdAsync(int id)
         {
             return await client.GetFromJsonAsync<T>(_path + "/" + id);
         }
 
-        public async Task<bool> ExistsByIdAsync(string id)
+        public async Task<bool> ExistsByIdAsync(int id)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(_path + "/" + id);
             return responseMessage.IsSuccessStatusCode;
@@ -35,12 +42,17 @@ namespace ApiClient.Repositories
             await client.PostAsJsonAsync(_path, entity);
         }
 
-        public async Task UpdateAsync(string id, T entity)
+        public async Task UpdateAsync(int id, T entity)
         {
             await client.PutAsJsonAsync(_path + "/" + id, entity);
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task UpdateByNameAsync(string name, T entity)
+        {
+            await client.PutAsJsonAsync(_path + "/" + name, entity);
+        }
+
+        public async Task DeleteAsync(int id)
         {
             await client.DeleteAsync(_path + "/" + id);
         }

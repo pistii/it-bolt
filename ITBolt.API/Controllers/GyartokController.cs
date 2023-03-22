@@ -24,7 +24,7 @@ namespace ITBolt.API.Controllers
 
         // GET: api/gyartok/gyarto1
         [HttpGet("{gyartoID}")]
-        public async Task<ActionResult<Gyarto>> GetGyarto(string gyartoID)
+        public async Task<ActionResult<Gyarto>> GetGyarto(int gyartoID)
         {
             var gyarto = await _context.gyarto.FindAsync(gyartoID);
 
@@ -44,7 +44,7 @@ namespace ITBolt.API.Controllers
         //}
         [HttpPut("{gyartoID}")]
 
-        public async Task<IActionResult> PutGyarto(string gyartoID, Gyarto gyarto)
+        public async Task<IActionResult> PutGyarto(int gyartoID, Gyarto gyarto)
         {
             if (gyartoID != gyarto.gyartoID)
             {
@@ -88,7 +88,7 @@ namespace ITBolt.API.Controllers
 
         // DELETE: /api/gyartok/gyarto2
         [HttpDelete("{gyartoID}")]
-        public async Task<IActionResult> DeleteGyarto(string gyartoID)
+        public async Task<IActionResult> DeleteGyarto(int gyartoID)
         {
             var gyarto = await _context.gyarto.FindAsync(gyartoID);
             if (gyarto == null)
@@ -101,7 +101,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool GyartoExists(string gyartoID)
+        private bool GyartoExists(int gyartoID)
         {
             return _context.gyarto.Any(e => e.gyartoID == gyartoID);
         }

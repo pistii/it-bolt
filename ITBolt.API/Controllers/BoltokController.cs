@@ -27,19 +27,22 @@ namespace ITBolt.API.Controllers
             string? sortBy = null,
             bool ascending = true)
         {
-            var query = _context.bolt.Include(x => x.raktar).OrderBy(x => x.bolt_neve).AsQueryable();
+            var query = _context.bolt.OrderBy(x => x.bolt_neve).AsQueryable();
             // Keresés
             if (!string.IsNullOrWhiteSpace(search))
             {
                 search = search.ToLower();
                 // Ha a keresési kulcsszó szám
-                int.TryParse(search, out int dij);
+                int.TryParse(search, out int szam);
                 // Ha dátum
                 DateTime.TryParse(search, out DateTime datum);
 
                 query = query.Where(x =>
                     x.bolt_neve.ToLower().Contains(search) ||
-                    x.bolt_cime.Equals(dij));
+                    x.nyitvatartasi_ido.ToLower().Contains(search) ||
+                    x.nyitvatartasi_ido.Equals(szam) ||
+                    x.bolt_cime.Contains(search) ||
+                    x.bolt_cime.Equals(szam));
             }
 
             // Sorbarendezés
@@ -72,9 +75,9 @@ namespace ITBolt.API.Controllers
             return new TableDTO<Bolt>(data, totalItems);
         }
 
-        // GET: /api/boltok/randomAZ1
+        // GET: /api/boltok/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bolt>> GetBoltok(string id)
+        public async Task<ActionResult<Bolt>> GetBoltok(int id)
         {
             var bolt = await _context.bolt.FindAsync(id);
 
@@ -97,7 +100,7 @@ namespace ITBolt.API.Controllers
         //}
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutBoltok(string id, Bolt bolt)
+        public async Task<IActionResult> PutBoltok(int id, Bolt bolt)
         {
             if (id != bolt.boltID)
             {
@@ -125,18 +128,14 @@ namespace ITBolt.API.Controllers
         }
 
         //POST: /api/boltok
-        //{
-        //"boltID": "randomAZ3",
-        //"raktarID": null,
-        //"rendelesID": 3,
-        //"bolt_neve": "Közepes-Bolt KFT.",
-        //"bolt_cime": "Közepes-Bolt",
-        //"nyitvatartasi_ido": "H-P 8:00 - 15",
-        //"raktar": null,
-        //"leltarieszkoz": []
-        //}
-        [HttpPost]
-        public async Task<ActionResult<Felhasznalo>> PostBoltok(Bolt bolt)
+//        {
+//    "raktarID" : 1,
+//    "bolt_neve" : "Nagy Bolt KFT.",
+//    "bolt_cime" : "Nagy Bolt",
+//    "nyitvatartasi_ido" : "H-P 8:00 - 16"
+//}
+    [HttpPost]
+        public async Task<ActionResult<Bolt>> PostBoltok(Bolt bolt)
         {
 
             _context.bolt.Add(bolt);
@@ -145,9 +144,9 @@ namespace ITBolt.API.Controllers
         }
 
 
-        // DELETE: /api/boltok/randomAZ3
+        // DELETE: /api/boltok/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBolt(string id)
+        public async Task<IActionResult> DeleteBolt(int id)
         {
             var bolt = await _context.bolt.FindAsync(id);
             if (bolt == null)
@@ -160,7 +159,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool BoltExists(string id)
+        private bool BoltExists(int id)
         {
             return _context.bolt.Any(e => e.boltID == id);
         }

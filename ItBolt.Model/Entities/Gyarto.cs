@@ -12,8 +12,8 @@ namespace ItBolt.Model.Entities
         }
 
         [Key]
-        [StringLength(25)]
-        public string? gyartoID { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int? gyartoID { get; set; }
         [StringLength(50)]
         public string? gyarto_neve { get; set; }
         [StringLength(50)]

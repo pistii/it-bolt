@@ -34,7 +34,10 @@ namespace ItBolt.WPF.ViewModels
         protected override async Task LoadData()
         {
             var boltok = await _boltRepo.GetAllAsync(page, ItemsPerPage, SearchKey, SortBy, ascending);
-            
+            Boltok = new ObservableCollection<Bolt>(boltok.Data);
+
+
+
         }
 
         private ObservableCollection<Bolt> _boltok = new();
@@ -43,6 +46,14 @@ namespace ItBolt.WPF.ViewModels
             get { return _boltok; }
             set { SetProperty(ref _boltok, value); }
         }
+
+        private ObservableCollection<Bolt> _raktarak = new();
+        public ObservableCollection<Bolt> Raktarak
+        {
+            get { return _raktarak; }
+            set { SetProperty(ref _raktarak, value); }
+        }
+
 
         private Bolt _selectedBolt = new();
         public Bolt SelectedBolt
@@ -55,6 +66,18 @@ namespace ItBolt.WPF.ViewModels
             }
         }
 
+        private Raktar _selectedRaktar = new();
+        public Raktar SelectedRaktar
+        {
+            get { return _selectedRaktar; }
+            set
+            {
+                SetProperty(ref _selectedRaktar, value);
+                DeleteCmdAsync.NotifyCanExecuteChanged();
+            }
+        }
+
+
         private void New()
         {
             SelectedBolt = new Bolt();
@@ -62,28 +85,29 @@ namespace ItBolt.WPF.ViewModels
 
         private async Task SaveAsync(Bolt bolt)
         {
-
-            if (bolt != null)
+            if (bolt.boltID > 0)
             {
                 bool exists = await _boltRepo.ExistsByIdAsync(bolt.boltID);
+
                 if (exists)
                 {
                     await _boltRepo.UpdateAsync(bolt.boltID, bolt);
-                    
                 }
+
                 else
                 {
                     await _boltRepo.InsertAsync(bolt);
                     Boltok.Insert(0, bolt);
                 }
             }
+
         }
 
         private bool CanDelete(Bolt bolt)
         {
             if (bolt != null)
             {
-                return bolt.boltID != string.Empty;
+                return bolt.boltID != null;
             }
             return false;
         }

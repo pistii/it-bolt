@@ -9,8 +9,8 @@ namespace ItBolt.Model.Entities
     public partial class Leltarieszkoz
     {
         [Key]
-        [StringLength(25)]
-        public string eszkozID { get; set; } = null!;
+        [Column(TypeName = "int(11)")]
+        public int eszkozID { get; set; }
         [Key]
         [StringLength(25)]
         public string boltID { get; set; } = null!;

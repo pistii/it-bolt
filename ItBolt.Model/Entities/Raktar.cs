@@ -13,12 +13,12 @@ namespace ItBolt.Model.Entities
         }
 
         [Key]
-        [StringLength(25)]
-        public string raktarID { get; set; } = null!;
+        [Column(TypeName = "int(11)")]
+        public int raktarID { get; set; }
         [StringLength(50)]
         public string? raktar_neve { get; set; }
         [StringLength(100)]
-        public string? bolt_helye { get; set; }
+        public string? raktar_helye { get; set; }
         public DateOnly? Berlesi_ido { get; set; }
 
         [InverseProperty("raktar")]

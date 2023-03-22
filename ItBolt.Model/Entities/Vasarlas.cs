@@ -11,10 +11,10 @@ namespace ItBolt.Model.Entities
     public partial class Vasarlas
     {
         [Key]
-        [StringLength(25)]
-        public string? vasarloID { get; set; }
         [Column(TypeName = "int(11)")]
-        public int rendelesID { get; set; } = 0!;
+        public int? vasarloID { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int rendelesID { get; set; }
         [StringLength(25)]
         public string? fizetesmod { get; set; } = null!;
 

@@ -25,7 +25,7 @@ namespace ITBolt.API.Controllers
 
         // GET: api/vasarlok/a1
         [HttpGet("{vasarloID}")]
-        public async Task<ActionResult<Vasarlo>> GetVasarlo(string vasarloID)
+        public async Task<ActionResult<Vasarlo>> GetVasarlo(int vasarloID)
         {
             var vasarlo = await _context.vasarlo.FindAsync(vasarloID);
 
@@ -40,7 +40,7 @@ namespace ITBolt.API.Controllers
         // PUT: /api/vasarlok/a1
         [HttpPut("{vasarloID}")]
 
-        public async Task<IActionResult> putVasarlo(string vasarloID, Vasarlo vasarlo)
+        public async Task<IActionResult> putVasarlo(int vasarloID, Vasarlo vasarlo)
         {
             if (vasarloID != vasarlo.vasarloID)
             {
@@ -80,7 +80,7 @@ namespace ITBolt.API.Controllers
 
         // DELETE: /api/vasarlo/a1
         [HttpDelete("{vasarloID}")]
-        public async Task<IActionResult> DeleteUser(string vasarloID)
+        public async Task<IActionResult> DeleteVasarlo(int vasarloID)
         {
             var vasarlo = await _context.vasarlo.FindAsync(vasarloID);
             if (vasarlo == null)
@@ -93,7 +93,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool VasarloExists(string id)
+        private bool VasarloExists(int id)
         {
             return _context.vasarlo.Any(e => e.vasarloID == id);
         }

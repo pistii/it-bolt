@@ -22,25 +22,16 @@ namespace ItBolt.WPF
         public new static App Current => (App)Application.Current;
         public IServiceProvider Services { get; }
 
-        protected override async void OnStartup(StartupEventArgs startupEventArgs)
-        {
-            base.OnStartup(startupEventArgs);
-            ServiceCollection services = new ServiceCollection();
-            services.AddSingleton<BelepesViewModel>();
-            services.AddSingleton<AddBoltViewModel>();
-            services.AddTransient<BoltKimutatasViewModel>();
-            services.AddTransient<BoltKimutatasView>();
-            services.AddTransient<AddBoltView>();
-            services.AddTransient<UdvozloViewModel>();
-
-        }
+       
 
         private static IServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<BelepesViewModel>();
-            services.AddSingleton<AddBoltViewModel>();
+            services.AddTransient<BelepesViewModel>();
+            services.AddTransient<AddBoltViewModel>();
+            services.AddTransient<AddRaktarViewModel>();
             services.AddTransient<BoltKimutatasViewModel>();
+            services.AddTransient<RaktarKimutatasViewModel>();
             services.AddTransient<BoltKimutatasView>();
             services.AddTransient<AddBoltView>();
 
@@ -58,10 +49,14 @@ namespace ItBolt.WPF
                 return new PagerRepository<Bolt>("api/Boltok");
             });
 
-
             services.AddTransient<IGenericRepository<Raktar>, GenericAPIRepository<Raktar>>(x =>
             {
-                return new PagerRepository<Raktar>("api/Raktar");
+                return new PagerRepository<Raktar>("api/Raktarak");
+            });
+
+            services.AddTransient<IPagerRepository<Raktar>, PagerRepository<Raktar>>(x =>
+            {
+                return new PagerRepository<Raktar>("api/Raktarok");
             });
 
 

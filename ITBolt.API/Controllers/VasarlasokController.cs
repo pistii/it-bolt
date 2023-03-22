@@ -25,7 +25,7 @@ namespace ITBolt.API.Controllers
 
         // GET: /api/vasarlasok/vasarloID777/7
         [HttpGet("{vasarloID}/{rendelesID}")]
-        public async Task<ActionResult<Vasarlas>> GetVasarlas(string vasarloID, int rendelesID)
+        public async Task<ActionResult<Vasarlas>> GetVasarlas(int vasarloID, int rendelesID)
         {
             var vasarlas = await _context.vasarlas.FindAsync(vasarloID, rendelesID);
 
@@ -37,7 +37,20 @@ namespace ITBolt.API.Controllers
             return vasarlas;
         }
 
-        // PUT: /api/vasarlas/vasarlas123
+        [HttpGet("{vasarloID}")]
+        public async Task<ActionResult<Vasarlas>> GetVasarlas(int vasarloID)
+        {
+            var vasarlas = await _context.vasarlas.FindAsync(vasarloID);
+
+            if (vasarlas == null)
+            {
+                return NotFound();
+            }
+
+            return vasarlas;
+        }
+
+        // PUT: /api/vasarlas/1
         [HttpPut("{rendelesID}")]
 
         public async Task<IActionResult> PutVasarlas(int rendelesID, Vasarlas rendeles)
@@ -68,7 +81,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        //POST: /api/vasarlasok/a1
+        //POST: /api/vasarlasok
         [HttpPost]
         public async Task<ActionResult<Vasarlas>> PostVasarlas(Vasarlas vasarlas)
         {
@@ -76,13 +89,13 @@ namespace ITBolt.API.Controllers
             _context.vasarlas.Add(vasarlas);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVasarlas", new { rendelesID = vasarlas.rendelesID }, vasarlas);
+            return CreatedAtAction("GetVasarlas", new { vasarloID = vasarlas.vasarloID }, vasarlas);
         }
 
 
         // DELETE: /api/vasarlasok/vasarloID777/7
         [HttpDelete("{vasarloID}/{rendelesID}")]
-        public async Task<IActionResult> DeleteVasarlas(string vasarloID, int rendelesID)
+        public async Task<IActionResult> DeleteVasarlas(int vasarloID, int rendelesID)
         {
             var vasarlas = await _context.vasarlas.FindAsync(vasarloID, rendelesID);
             if (vasarlas == null)

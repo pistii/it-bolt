@@ -19,7 +19,7 @@ namespace ITBolt.API.Controllers
 
         // GET: api/leltarieszkozok/
         [HttpGet("{boltID}")]
-        public async Task<ActionResult<Leltarieszkoz>> GetLeltarieszkoz(string boltID)
+        public async Task<ActionResult<Leltarieszkoz>> GetLeltarieszkoz(int boltID)
         {
             var leltarieszkoz = await _context.leltarieszkoz.FindAsync(boltID);
 
@@ -33,7 +33,7 @@ namespace ITBolt.API.Controllers
 
         // PUT: /api/leltarieszkoz/KisBolt
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLeltarieszkoz(string leltarieszkozAZ, Leltarieszkoz leltarieszkoz)
+        public async Task<IActionResult> PutLeltarieszkoz(int leltarieszkozAZ, Leltarieszkoz leltarieszkoz)
         {
             if (leltarieszkozAZ != leltarieszkoz.eszkozID)
             {
@@ -74,7 +74,7 @@ namespace ITBolt.API.Controllers
 
         // DELETE: /api/leltarieszkoz/leltarieszkozAZ
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLeltarieszkoz(string leltarieszkozAZ)
+        public async Task<IActionResult> DeleteLeltarieszkoz(int leltarieszkozAZ)
         {
             var leltarieszkoz = await _context.leltarieszkoz.FindAsync(leltarieszkozAZ);
             if (leltarieszkoz == null)
@@ -87,7 +87,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool LeltarieszkozExists(string leltarieszkozAZ)
+        private bool LeltarieszkozExists(int leltarieszkozAZ)
         {
             return _context.leltarieszkoz.Any(e => e.eszkozID == leltarieszkozAZ);
         }

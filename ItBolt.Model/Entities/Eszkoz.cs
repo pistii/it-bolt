@@ -11,23 +11,22 @@ namespace ItBolt.Model.Entities
     public partial class Eszkoz
     {
         [Key]
-        [StringLength(25)]
-        public string eszkozID { get; set; } = null!;
-        [StringLength(25)]
-        public string gyartoID { get; set; } = null!;
-        [StringLength(25)]
-        public string rendelesID { get; set; } = null!;
+        [Column(TypeName = "int(11)")]
+        public int eszkozID { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int gyartoID { get; set; }
         [StringLength(50)]
-        public string eszkoz_neve { get; set; } = null!;
+        public string? eszkoz_neve { get; set; }
         [Column(TypeName = "int(11)")]
         public int? eszkoz_ara { get; set; }
-        [StringLength(25)]
-        public string eszkoz_sorozatszama { get; set; } = null!;
+        [StringLength(50)]
+        public string? eszkoz_sorozatszama { get; set; }
 
         [JsonConverter(typeof(DateOnlyConverter))]
         public DateOnly? eszkoz_gyartas_ev { get; set; }
-        [StringLength(25)]
-        public string kategoriaID { get; set; } = null!;
+        [Column(TypeName = "int(11)")]
+
+        public int kategoriaID { get; set; }
         [Column(TypeName = "int(11)")]
         public int? raktar_keszlet { get; set; }
         [Column(TypeName = "bit(1)")]
@@ -36,12 +35,13 @@ namespace ItBolt.Model.Entities
         public ulong? kedvezmenyes_e { get; set; }
         [StringLength(50)]
         public string eszkoz_tipus { get; set; } = null!;
-
+        [JsonIgnore]
         [ForeignKey("gyartoID")]
         [InverseProperty("eszkoz")]
         public virtual Gyarto? gyarto { get; set; }
         [ForeignKey("kategoriaID")]
         [InverseProperty("eszkoz")]
+        [JsonIgnore]
         public virtual Kategoria? kategoria { get; set; }
     }
 }

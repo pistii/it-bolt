@@ -6,6 +6,7 @@ using ItBolt.WPF;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ItBolt.WPF.Commands;
+using System.Windows.Documents;
 
 namespace ItBolt.WPF.ViewModels
 {
@@ -59,8 +60,8 @@ namespace ItBolt.WPF.ViewModels
             var boltok = await _boltRepo.GetAllAsync(page, ItemsPerPage, SearchKey, SortBy, ascending);
             TotalItems = boltok.TotalItems;
             Boltok = new ObservableCollection<Bolt>(boltok.Data);
-            var raktarak = await _raktarRepo.GetAllAsync();
-            Raktarak = new ObservableCollection<Raktar>(raktarak); //Raktarak volt
+            //var raktarak = await _raktarRepo.GetAllAsync();
+            //Raktarak = new ObservableCollection<Raktar>(raktarak); //Raktarak volt
 
         }
 
@@ -71,10 +72,14 @@ namespace ItBolt.WPF.ViewModels
 
         private async Task SaveAsync(Bolt bolt)
         {
-            bool exists = await _boltRepo.ExistsByIdAsync(bolt.boltID);
-            if (exists)
+            if (bolt.boltID > 0)
             {
-                await _boltRepo.UpdateAsync(bolt.boltID, bolt);
+                bool exists = await _boltRepo.ExistsByIdAsync(bolt.boltID);
+
+                if (exists)
+                {
+                    await _boltRepo.UpdateAsync(bolt.boltID, bolt);
+                }
             }
             else
             {
@@ -87,7 +92,7 @@ namespace ItBolt.WPF.ViewModels
         {
             if (bolt != null)
             {
-                return !string.IsNullOrEmpty(bolt.boltID);
+                return bolt.boltID > 0;
             }
             return false;
         }

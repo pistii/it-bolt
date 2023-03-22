@@ -14,8 +14,8 @@ namespace ItBolt.Model.Entities
         }
 
         [Key]
-        [StringLength(25)]
-        public string vasarloID { get; set; } = null!;
+        [Column(TypeName = "int(11)")]
+        public int vasarloID { get; set; }
         [StringLength(50)]
         public string? vasarlo_neve { get; set; }
         [Column(TypeName = "int(10)")]

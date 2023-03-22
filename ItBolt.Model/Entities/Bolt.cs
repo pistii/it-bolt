@@ -14,12 +14,12 @@ namespace ItBolt.Model.Entities
         }
 
         [Key]
-        [StringLength(25)]
-        public string boltID { get; set; } = null!;
-        [StringLength(25)]
-        public string? raktarID { get; set; }
         [Column(TypeName = "int(11)")]
-        public int? rendelesID { get; set; }
+        public int boltID { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int raktarID { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int rendelesID { get; set; }
         [StringLength(50)]
         public string? bolt_neve { get; set; }
         [StringLength(100)]

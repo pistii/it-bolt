@@ -23,9 +23,9 @@ namespace ITBolt.API.Controllers
             _context = context;
         }
 
-        // GET: api/kategoriak/kategoria1
+        // GET: api/kategoriak/1
         [HttpGet("{kategoriaID}")]
-        public async Task<ActionResult<Kategoria>> GetKategoria(string kategoriaID)
+        public async Task<ActionResult<Kategoria>> GetKategoria(int kategoriaID)
         {
             var value = await _context.kategoria.FindAsync(kategoriaID);
 
@@ -37,11 +37,11 @@ namespace ITBolt.API.Controllers
             return value;
         }
 
-        // PUT: /api/kategoriak/kategoria1
+        // PUT: /api/kategoriak/1
 
         [HttpPut("{kategoriaID}")]
 
-        public async Task<IActionResult> PutKategoria(string kategoriaID, Kategoria kategoria)
+        public async Task<IActionResult> PutKategoria(int kategoriaID, Kategoria kategoria)
         {
             if (kategoriaID != kategoria.kategoriaID)
             {
@@ -84,7 +84,7 @@ namespace ITBolt.API.Controllers
 
         // DELETE: /api/kategoriak/kategoria1
         [HttpDelete("{kategoriaID}")]
-        public async Task<IActionResult> DeleteKategoria(string kategoriaID)
+        public async Task<IActionResult> DeleteKategoria(int kategoriaID)
         {
             var value = await _context.kategoria.FindAsync(kategoriaID);
             if (value == null)
@@ -97,7 +97,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool KategoriaExists(string kategoriaID)
+        private bool KategoriaExists(int kategoriaID)
         {
             return _context.kategoria.Any(e => e.kategoriaID == kategoriaID);
         }

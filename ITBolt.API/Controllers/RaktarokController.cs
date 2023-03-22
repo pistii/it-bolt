@@ -24,7 +24,7 @@ namespace ITBolt.API.Controllers
 
         // GET: api/raktarok/raktarID123
         [HttpGet("{id}")]
-        public async Task<ActionResult<Raktar>> GetRaktar(string id)
+        public async Task<ActionResult<Raktar>> GetRaktar(int id)
         {
             var raktar = await _context.raktar.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace ITBolt.API.Controllers
         // PUT: /api/raktarok/raktarID234
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutUser(string id, Raktar raktar)
+        public async Task<IActionResult> PutUser(int id, Raktar raktar)
         {
             if (id != raktar.raktarID)
             {
@@ -80,7 +80,7 @@ namespace ITBolt.API.Controllers
 
         // DELETE: /api/raktarok/raktarID123
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRaktar(string id)
+        public async Task<IActionResult> DeleteRaktar(int id)
         {
             var raktar = await _context.raktar.FindAsync(id);
             if (raktar == null)
@@ -93,7 +93,7 @@ namespace ITBolt.API.Controllers
             return NoContent();
         }
 
-        private bool RaktarExists(string id)
+        private bool RaktarExists(int id)
         {
             return _context.raktar.Any(e => e.raktarID == id);
         }

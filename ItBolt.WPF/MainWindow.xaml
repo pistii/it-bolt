@@ -51,7 +51,7 @@
                     <MenuItem Header="Új..."  Padding="10,0,10,0" 
                               IsEnabled="{Binding EnabledButton}">
                         <MenuItem Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
-                        <MenuItem Header="Raktár" x:Name="UjRaktar" />
+                        <MenuItem Header="Raktár" Command="{Binding UpdateViewCommand}" CommandParameter="AddRaktar" />
                         <MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />
                         <MenuItem Header="Eszköz" x:Name="UjEszkoz"/>
                         <MenuItem Header="Gyártó" x:Name="UjGyarto" />
@@ -64,7 +64,7 @@
                         <MenuItem Header="Eszközökről" />
                         <MenuItem Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
                         <MenuItem Header="Vásárlókról" />
-                        <MenuItem Header="Raktárakról" />
+                        <MenuItem Header="Raktárakról" Command="{Binding UpdateViewCommand}" CommandParameter="RaktarKimutatas" />
                     </MenuItem>
                 </Menu>
 

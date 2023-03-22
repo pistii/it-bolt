@@ -17,13 +17,19 @@
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> GetByIdAsync(string id);
+        Task<T> GetByIdAsync(int id);
         /// <summary>
         /// Létezik-e az elem, azonosító alapján
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> ExistsByIdAsync(string id);
+        Task<bool> ExistsByIdAsync(int id);
+        /// <summary>
+        /// Létezik-e az elem, név alapján
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> ExistsByNameAsync(string id);
         /// <summary>
         /// Beilleszt egy új elemet
         /// </summary>
@@ -35,12 +41,18 @@
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task UpdateAsync(string id, T entity);
+        Task UpdateAsync(int id, T entity);
+        /// <summary>
+        /// Módosít egy meglévő elemet név alapján
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task UpdateByNameAsync(string name, T entity);
         /// <summary>
         /// Törli a megadott elemet azonosító alapján
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteAsync(string id);
+        Task DeleteAsync(int id);
     }
 }

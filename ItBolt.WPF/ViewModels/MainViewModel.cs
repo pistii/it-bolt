@@ -50,9 +50,17 @@ namespace ItBolt.WPF.ViewModels
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<AddBoltViewModel>();
                     break;
+                case "AddRaktar":
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<AddRaktarViewModel>();
+                    break;
                 case "BoltKimutatas":
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<BoltKimutatasViewModel>();
+                    break;
+                case "RaktarKimutatas":
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<RaktarKimutatasViewModel>();
                     break;
                 case "LogIn":
                    SelectedViewModel = App.Current.Services.
