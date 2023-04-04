@@ -27,22 +27,30 @@
                           ItemsSource="{Binding IPPList}"
                           SelectedItem="{Binding ItemsPerPage}">
                 </ComboBox>
+                <Button Content="Törlés" Margin="10,0,0,0" Command="{Binding DeleteCmdAsync}" CommandParameter="{Binding SelectedRaktar}" />
+                <Button Content="Mentés" Margin="10,0,0,0" Command="{Binding SaveCmdAsync}" CommandParameter="{Binding SelectedRaktar}" />
             </StackPanel>
             <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox Width="200" Text="{Binding SearchKey}" VerticalAlignment="Center" />
-                <Button Content="Keresés" Command="{Binding LoadDataCmd}" Margin="12,0,12,0" Height="20" />
+                <DockPanel >
+                    <TextBox Width="200" Text="{Binding SearchKey}" VerticalAlignment="Center" BorderBrush="LightGray" BorderThickness="2" Padding="2">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Resources/searchIcon.png" Stretch="None" TileMode="None" AlignmentX="Right" AlignmentY="Center" />
+                        </TextBox.Background>
+                    </TextBox>
+                    <Button Content="Keresés" Command="{Binding LoadDataCmd}" Margin="12,0,12,0" Height="20" />
+                </DockPanel>
             </StackPanel>
         </Grid>
 
         <DataGrid Grid.Row="3" ColumnWidth="*"
                   ItemsSource="{Binding Raktarak}" SelectedItem="{Binding SelectedRaktar}"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
-                  IsReadOnly="True" SelectionMode="Single" 
+                  IsReadOnly="False" SelectionMode="Single" 
                   Sorting="DataGrid_Sorting">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Raktár neve" Binding="{Binding raktar_neve}"/>
-                <DataGridTextColumn Header="Raktár címe" Binding="{Binding raktar_cime}"/>
-                <DataGridTextColumn Header="Bérlési ideje" Binding="{Binding Berlesi_ido}" />
+                <DataGridTextColumn Header="Raktár címe" Binding="{Binding raktar_helye}"/>
+                <DataGridTextColumn Header="Bérlési ideje" Binding="{Binding Berlesi_ido, StringFormat='yyyy-MM-dd'}"  />
             </DataGrid.Columns>
         </DataGrid>
 

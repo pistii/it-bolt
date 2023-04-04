@@ -15,11 +15,17 @@
     <DataTemplate DataType="{x:Type viewmodels:RaktarKimutatasViewModel}">
         <views:RaktarKimutatasView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:EszkozKimutatasViewModel}">
+        <views:EszkozKimutatasView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:AddBoltViewModel}">
         <views:AddBoltView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:AddRaktarViewModel}">
         <views:AddRaktarView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AddEszkozViewModel}">
+        <views:AddEszkozView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodels:UdvozloViewModel}">
         <views:UdvozloView/>

@@ -1,14 +1,19 @@
-﻿<UserControl x:Class="ItBolt.WPF.Views.BoltKimutatasView"
+﻿<UserControl x:Class="ItBolt.WPF.Views.EszkozKimutatasView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:convert="clr-namespace:ItBolt.WPF.Resources"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ItBolt.WPF.Views"
-             xmlns:res="clr-namespace:ItBolt.WPF.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
-    <Grid >
+
+    <UserControl.Resources>
+        <convert:BinToStringConverter x:Key="Convert"/>
+        <convert:BinToStringConverter x:Key="DiscountConvert"/>
+    </UserControl.Resources>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -78,7 +83,7 @@
             </Grid>
         </Expander>-->
 
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,10,0,10">
                 <TextBlock Text="Összesen: "/>
                 <TextBlock Text="{Binding TotalItems}"/>
@@ -87,8 +92,8 @@
                           ItemsSource="{Binding IPPList}"
                           SelectedItem="{Binding ItemsPerPage}">
                 </ComboBox>
-                <Button Content="Törlés" Margin="10,0,0,0" Command="{Binding DeleteCmdAsync}" CommandParameter="{Binding SelectedBolt}" />
-                <Button Content="Mentés" Margin="10,0,0,0" Command="{Binding SaveCmdAsync}" CommandParameter="{Binding SelectedBolt}" />
+                <Button Content="Törlés" Margin="10,0,0,0" Command="{Binding DeleteCmdAsync}" CommandParameter="{Binding SelectedEszkoz}" />
+                <Button Content="Mentés" Margin="10,0,0,0" Command="{Binding SaveCmdAsync}" CommandParameter="{Binding SelectedEszkoz}" />
 
             </StackPanel>
             <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -104,19 +109,21 @@
             </StackPanel>
         </Grid>
 
-        <DataGrid Grid.Row="3" ColumnWidth="*" 
-                  ItemsSource="{Binding Boltok}" SelectedItem="{Binding SelectedBolt}"
+        <DataGrid Grid.Row="3" ColumnWidth="*"
+                  ItemsSource="{Binding Eszkozok}" SelectedItem="{Binding SelectedEszkoz}"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
                   IsReadOnly="False" SelectionMode="Single" 
                   Sorting="DataGrid_Sorting">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bolt neve" Binding="{Binding bolt_neve}"/>
-                <DataGridTextColumn Header="Bolt címe" Binding="{Binding bolt_cime}"/>
-                <DataGridTextColumn Header="Nyitvatartás ideje" Binding="{Binding nyitvatartasi_ido}" />
-
+                <DataGridTextColumn Header="Eszköz neve" Binding="{Binding eszkoz_neve}"/>
+                <DataGridTextColumn Header="Eszkoz ára" Binding="{Binding eszkoz_ara}"/>
+                <DataGridTextColumn Header="Eszköz sorozatszáma" Binding="{Binding eszkoz_sorozatszama}" />
+                <DataGridTextColumn Header="Eszköz gyártási éve" Binding="{Binding eszkoz_gyartas_ev, StringFormat='yyyy-MM-dd'}" />
+                <DataGridTextColumn Header="Raktár készlet" Binding="{Binding raktar_keszlet}" />
+                <DataGridTextColumn Header="Garanciális" Binding="{Binding garancialis_e, Converter={StaticResource Convert }, ConverterParameter=garancialis}" />
+                <DataGridTextColumn Header="Kedvezményes" Binding="{Binding kedvezmenyes_e, Converter={StaticResource Convert }, ConverterParameter=kedvezmeny}"/>
+                <!--<DataGridTextColumn Header="Eszköz tipus" Binding="{Binding eszkoz_tipus}" />-->
             </DataGrid.Columns>
-
-
         </DataGrid>
 
         <Grid Grid.Row="4" Margin="5">

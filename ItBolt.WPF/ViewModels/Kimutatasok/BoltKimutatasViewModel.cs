@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ItBolt.WPF.Commands;
 using System.Windows.Documents;
+using System.Windows;
 
 namespace ItBolt.WPF.ViewModels
 {
@@ -99,8 +100,11 @@ namespace ItBolt.WPF.ViewModels
 
         private async Task DeleteAsync(Bolt bolt)
         {
-            await _raktarRepo.DeleteAsync(bolt.boltID);
-            Boltok.Remove(bolt);
+            if (MessageBox.Show("Törlés", "Biztos benne?", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+            {
+                await _boltRepo.DeleteAsync(bolt.boltID);
+                Boltok.Remove(bolt);
+            }
         }
     }
 }

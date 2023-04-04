@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ItBolt.WPF"
-        xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
+        xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="IT Bolt App" Height="600" Width="1200"
-        ResizeMode="NoResize"
+        Title="IT Bolt App" Height="800" Width="1200"
         Background="AliceBlue"
         AllowsTransparency="False"
         >
@@ -26,15 +25,14 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <Border  CornerRadius="10" Background="#1b6874" Margin="10,1,10,0">
                 <Menu Margin="30,0,30,0" Background="Transparent">
                     
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Horizontal"/>
+                            <DockPanel HorizontalAlignment="Stretch"/>
 
                         </ItemsPanelTemplate>
                     </Menu.ItemsPanel>
@@ -48,23 +46,30 @@
                                             Mode=TwoWay, 
                                             UpdateSourceTrigger=PropertyChanged}" >
                     </MenuItem>
-                    <MenuItem Header="Új..."  Padding="10,0,10,0" 
+                    <MenuItem Foreground="LightYellow"  Header="Új..."  Padding="10,0,10,0" 
                               IsEnabled="{Binding EnabledButton}">
-                        <MenuItem Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
-                        <MenuItem Header="Raktár" Command="{Binding UpdateViewCommand}" CommandParameter="AddRaktar" />
-                        <MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />
-                        <MenuItem Header="Eszköz" x:Name="UjEszkoz"/>
-                        <MenuItem Header="Gyártó" x:Name="UjGyarto" />
+                        <MenuItem Foreground="Black" Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
+                        <MenuItem Foreground="Black" Header="Raktár" Command="{Binding UpdateViewCommand}" CommandParameter="AddRaktar" />
+                        <!--<MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />-->
+                        <MenuItem Foreground="Black" Header="Eszköz" Command="{Binding UpdateViewCommand}" CommandParameter="AddEszkoz"
+                                  x:Name="UjEszkoz"/>
+                        <!--<MenuItem Header="Gyártó" x:Name="UjGyarto" />
                         <MenuItem Header="Kategória" x:Name="UjKategoria" />
                         <MenuItem Header="Vásárló" x:Name="UjVasarlo" />
-                        <MenuItem Header="Vásárlás" x:Name="UjVasarlas" />
+                        <MenuItem Header="Vásárlás" x:Name="UjVasarlas" />-->
                     </MenuItem>
 
-                    <MenuItem Header="Kimutatás..."  Padding="10,0,10,0" IsEnabled="{Binding EnabledButton}">
-                        <MenuItem Header="Eszközökről" />
-                        <MenuItem Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
-                        <MenuItem Header="Vásárlókról" />
-                        <MenuItem Header="Raktárakról" Command="{Binding UpdateViewCommand}" CommandParameter="RaktarKimutatas" />
+                    <MenuItem Foreground="LightYellow" Header="Kimutatás..."  Padding="10,0,10,0" IsEnabled="{Binding EnabledButton}">
+                        <MenuItem Foreground="Black" Header="Eszközökről"  Command="{Binding UpdateViewCommand}" CommandParameter="EszkozKimutatas"/>
+                        <MenuItem Foreground="Black" Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
+                        <!--<MenuItem Header="Vásárlókról" />-->
+                        <MenuItem Foreground="Black" Header="Raktárakról" Command="{Binding UpdateViewCommand}" CommandParameter="RaktarKimutatas" />
+                    </MenuItem>
+
+                    <MenuItem HorizontalAlignment="Right" Command="{Binding QuitCmd}">
+                        <MenuItem.Icon >
+                            <fa:ImageAwesome Icon="SignOut" HorizontalAlignment="Right"/>
+                        </MenuItem.Icon>
                     </MenuItem>
                 </Menu>
 

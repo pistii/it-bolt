@@ -18,6 +18,7 @@ namespace ItBolt.WPF.ViewModels
 
         private ObservableObject _selectedViewModel;
         public IRelayCommand<object> UpdateViewCommand { get; set; }
+        public IRelayCommand QuitCmd { get; set; }
 
         public ObservableObject SelectedViewModel
         {
@@ -33,12 +34,13 @@ namespace ItBolt.WPF.ViewModels
 
         public MainViewModel()
         {
-            //SelectedViewModel = App.Current.Services.GetRequiredService<BelepesViewModel>();
-            SelectedViewModel = App.Current.Services.GetRequiredService<UdvozloViewModel>();
-            UpdateViewCommand = new RelayCommand<object>(e => Execute(e));
-            enabledButton = true;
-            //enabledButton = false;
+            SelectedViewModel = App.Current.Services.GetRequiredService<BelepesViewModel>();
+            //SelectedViewModel = App.Current.Services.GetRequiredService<UdvozloViewModel>();
+            UpdateViewCommand = new RelayCommand<object>(e => Execute(e!));
+            //enabledButton = true;
+            enabledButton = false;
             Log = "Belépés";
+            QuitCmd = new RelayCommand(Quit);
         }
 
 
@@ -54,6 +56,10 @@ namespace ItBolt.WPF.ViewModels
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<AddRaktarViewModel>();
                     break;
+                case "AddEszkoz":
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<AddEszkozViewModel>();
+                    break;
                 case "BoltKimutatas":
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<BoltKimutatasViewModel>();
@@ -62,23 +68,33 @@ namespace ItBolt.WPF.ViewModels
                     SelectedViewModel = App.Current.Services.
                     GetRequiredService<RaktarKimutatasViewModel>();
                     break;
+                case "EszkozKimutatas":
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<EszkozKimutatasViewModel>();
+                    break;
                 case "LogIn":
                    SelectedViewModel = App.Current.Services.
                    GetRequiredService<UdvozloViewModel>();
                     break;
                 case "LogOut":
-                    //reload the view
-                    
-                    //Task.Factory.StartNew(() => SelectedViewModel = App.Current.Services.
-                    //GetRequiredService<BelepesViewModel>());
-                    //SelectedViewModel = App.Current.Services.
-                    //GetRequiredService<BelepesViewModel>();
-
+                    Log = "Belépés";
+                    EnabledButton = false;
+                    SelectedViewModel = App.Current.Services.
+                    GetRequiredService<BelepesViewModel>();
                     break;
                 default:
                     break;
             }
         }
+
+        private void Quit()
+        {
+            ITBolt.API.Program.Exit();
+
+            Environment.Exit(0);
+
+        }
+
 
         private string log;
         public string Log
@@ -98,5 +114,6 @@ namespace ItBolt.WPF.ViewModels
                 SetProperty(ref enabledButton, value);
             }
         }
-}
+
+    }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ITBolt.API.Data;
 using ItBolt.Model.Entities;
-
+using ItBolt.Model.DTOs;
 
 namespace ITBolt.API.Controllers
 {
@@ -16,6 +16,92 @@ namespace ITBolt.API.Controllers
         public EszkozokController(ITBoltContext context)
         {
             _context = context;
+        }
+
+
+        // GET: api/Eszkozok
+        [HttpGet]
+        public async Task<TableDTO<Eszkoz>> GetAll(
+            int page = 1,
+            int itemsPerPage = 20,
+            string? search = null,
+            string? sortBy = null,
+            bool ascending = true)
+        {
+            var query = _context.eszkoz.OrderBy(x => x.eszkoz_neve).AsQueryable();
+            // Keresés
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                // Ha a keresési kulcsszó szám
+                int.TryParse(search, out int szam);
+                //Kedvezményes akkor 1 vagy nem kedvezményes 0 
+                ulong kedvezmenyOrGaranciaQuery = 0;
+                if (search.Contains("nem"))
+                {
+                    kedvezmenyOrGaranciaQuery = 0;
+                }
+                if (search.Contains("kedv") || search.Contains("gar"))
+                {
+                    kedvezmenyOrGaranciaQuery = 1;
+                }
+                // Ha dátum
+                DateTime.TryParse(search, out DateTime datum);
+
+                query = query.Where(x =>
+                    x.eszkoz_neve.ToLower().Contains(search) ||
+                    x.eszkoz_ara.Equals(szam) ||
+                    x.eszkoz_sorozatszama.Contains(search) ||
+                    x.eszkoz_gyartas_ev.Equals(datum) ||
+                    x.raktar_keszlet.Equals(szam) ||
+                    x.eszkoz_tipus.Contains(search) ||
+                    x.kedvezmenyes_e.Equals(kedvezmenyOrGaranciaQuery)
+                    );
+            }
+
+            // Sorbarendezés
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                switch (sortBy)
+                {
+
+                    case "eszkoz_neve":
+                        query = ascending ? query.OrderBy(x => x.eszkoz_neve) : query.OrderByDescending(x => x.eszkoz_neve);
+                        break;
+                    case "eszkoz_ara":
+                        query = ascending ? query.OrderBy(x => x.eszkoz_ara) : query.OrderByDescending(x => x.eszkoz_ara);
+                        break;
+                    case "eszkoz_sorozatszama":
+                        query = ascending ? query.OrderBy(x => x.eszkoz_sorozatszama) : query.OrderByDescending(x => x.eszkoz_sorozatszama);
+                        break;
+                    case "raktar_keszlet":
+                        query = ascending ? query.OrderBy(x => x.raktar_keszlet) : query.OrderByDescending(x => x.raktar_keszlet);
+                        break;
+                    case "garancialis_e":
+                        query = ascending ? query.OrderBy(x => x.garancialis_e) : query.OrderByDescending(x => x.garancialis_e);
+                        break;
+                    case "kedvezmenyes_e":
+                        query = ascending ? query.OrderBy(x => x.kedvezmenyes_e) : query.OrderByDescending(x => x.kedvezmenyes_e);
+                        break;
+                    case "eszkoz_tipus":
+                        query = ascending ? query.OrderBy(x => x.eszkoz_tipus) : query.OrderByDescending(x => x.eszkoz_tipus);
+                        break;
+                    default:
+                        query = ascending ? query.OrderBy(x => x.eszkoz_neve) : query.OrderByDescending(x => x.eszkoz_neve);
+                        break;
+                }
+            }
+
+            // Összes találat kiszámítása
+            int totalItems = await query.CountAsync();
+
+            // Oldaltördelés
+            if (page + itemsPerPage > 0)
+            {
+                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+            }
+            var data = await query.ToListAsync();
+            return new TableDTO<Eszkoz>(data, totalItems);
         }
 
         // GET: api/Eszkozok/1

@@ -3,7 +3,6 @@ using ITBolt.API.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
-
 namespace ITBolt.API
 {
     public class Program
@@ -31,8 +30,12 @@ namespace ITBolt.API
                                   policy =>
                                   {
                                       policy.WithOrigins("http://localhost:5173");
+                                      policy.WithOrigins("http://localhost:4444");
                                   });
             });
+
+
+            builder.Services.AddControllers().AddNewtonsoftJson();
             builder.Services.AddControllers();
 
             var app = builder.Build();
@@ -40,7 +43,15 @@ namespace ITBolt.API
             app.UseAuthorization();
             app.MapControllers();
             app.Run();
+
+            
         }
+
+        public static void Exit()
+        {
+            Environment.Exit(0);
+        }
+
     }
 
 }

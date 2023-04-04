@@ -1,4 +1,6 @@
-﻿namespace ApiClient.Repositories
+﻿using System.Security;
+
+namespace ApiClient.Repositories
 {
     public interface IGenericRepository<T>
     {
@@ -12,6 +14,8 @@
         /// </summary>
         /// <returns></returns>
         Task<bool> ExistsByNameAndPw(string nev, string pw);
+        Task<bool> ExistsByNameAndPw(string nev, SecureString pw);
+
         /// <summary>
         /// Lekérdez egy elemet azonosító alapján
         /// </summary>

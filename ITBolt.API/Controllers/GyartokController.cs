@@ -22,6 +22,13 @@ namespace ITBolt.API.Controllers
             _context = context;
         }
 
+        // GET: api/Gyartok
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Gyarto>>> GetGyartok()
+        {
+            return await _context.gyarto.OrderBy(x => x.gyarto_neve).ToListAsync();
+        }
+
         // GET: api/gyartok/gyarto1
         [HttpGet("{gyartoID}")]
         public async Task<ActionResult<Gyarto>> GetGyarto(int gyartoID)

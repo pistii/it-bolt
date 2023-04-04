@@ -1,9 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Security;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using ApiClient.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ItBolt.Model.Entities;
 using ItBolt.WPF.Commands;
+using ItBolt.WPF.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ItBolt.WPF.ViewModels
@@ -18,6 +24,7 @@ namespace ItBolt.WPF.ViewModels
 
         // https://blog.magnusmontin.net/2022/01/20/bind-to-a-parent-element-in-winui-3/
         //https://www.petrzavodny.com/blog/AsyncFeedWithSpinnerWPFMVVM.html
+        //Passwordbox https://stackoverflow.com/questions/1483892/how-to-bind-to-a-passwordbox-in-mvvm
 
         public BelepesViewModel(ILoginRepository<Felhasznalo> felhasznaloRepo)
         {
@@ -29,9 +36,9 @@ namespace ItBolt.WPF.ViewModels
         }
 
         public async Task LogIn(object dc)
-        { 
+        {
             SpinSpinner(true, "Visible");
-            var letezik = await _felhasznaloRepo.ExistsByNameAndPw(Nev!, _jelszoJo!);
+            var letezik = await _felhasznaloRepo.ExistsByNameAndPw(Nev!, Password);
             if (letezik)
             {
                 LoggedIn();
@@ -49,7 +56,6 @@ namespace ItBolt.WPF.ViewModels
             App.Current.Services.GetRequiredService<MainViewModel>().EnabledButton = true;
             App.Current.Services.GetRequiredService<MainViewModel>().Log = "Kilépés";
             App.Current.Services.GetRequiredService<MainViewModel>().UpdateViewCommand.Execute("LogIn");
-            
         }
 
 
@@ -91,34 +97,16 @@ namespace ItBolt.WPF.ViewModels
             }
         }
 
-
-
-
+        public SecureString SecurePassword { private get; set; }
+        public string Password { private get; set; }
 
         private string? _nev;
-        private string? _jelszoJo;
-        private string? _jelszo;
-
         public string? Nev
         {
             get { return _nev; }
             set { SetProperty(ref _nev, value);
             }
         }
-        public string? Jelszo
-        {
-            get { 
-
-                if (_jelszoJo != null)
-                {
-                    _jelszo = new string('\u25CF', _jelszoJo.Length);
-                    return _jelszo ;
-                }
-                return _jelszoJo;
-            }
-            set { SetProperty(ref _jelszoJo, value); }
-        }
-
     }
 
 

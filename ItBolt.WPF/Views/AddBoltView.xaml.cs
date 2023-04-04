@@ -1,5 +1,6 @@
 ﻿using ItBolt.WPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Controls;
 
 namespace ItBolt.WPF.Views
@@ -14,6 +15,14 @@ namespace ItBolt.WPF.Views
 
             InitializeComponent();
             //DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
+        }
+
+        private void cbRaktarKereses_Load(object sender, SelectionChangedEventArgs e)
+        {
+
+            cbRaktarKereses.SelectedItem = null;
+            cbRaktarKereses.Text = "--select--";
+            
         }
     }
 }

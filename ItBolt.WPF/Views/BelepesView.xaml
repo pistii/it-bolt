@@ -6,20 +6,22 @@
         xmlns:local="clr-namespace:ItBolt.WPF.Views" 
         xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels"
         xmlns:validation="clr-namespace:ItBolt.WPF.Validators" 
-        xmlns:fa="http://schemas.fontawesome.io/icons/" d:DataContext="{d:DesignInstance Type=vm:BelepesViewModel}"
+        xmlns:fa="http://schemas.fontawesome.io/icons/" 
+             d:DataContext="{d:DesignInstance Type=vm:BelepesViewModel}"
              mc:Ignorable="d"
-        Height="450" Width="800" Background="AliceBlue"
-             
         >
-    
-    <Grid>
+    <UserControl.Background>
+        <ImageBrush Stretch="Fill" TileMode="Tile" AlignmentX="Center" AlignmentY="Center" ImageSource="/Resources/loginbg.jpg"></ImageBrush>
+    </UserControl.Background>
+
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Margin="0,0,10,0">
+        <StackPanel Margin="0,150,10,0" >
             <Label Foreground="Black" HorizontalAlignment="Center" FontSize="30">Belépés</Label>
-            <Separator Margin="0,0,0,50"/>
+            <Separator Margin="200,0,200,50"/>
             <Label Content="Belépési név" Foreground="Black"  FontWeight="Bold" HorizontalAlignment="Center"  />
             <Border CornerRadius="10" Background="#c0ebed"
                     Margin="0,10,0,10" 
@@ -56,23 +58,26 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>-->
-                <TextBox 
+                <PasswordBox 
                          Background="Transparent" 
+                         PasswordBox.PasswordChanged="pwdBox_PasswordChanged"
                          Foreground="Black" 
                          FontSize="18" 
                          Height="30" Width="250" 
                          BorderThickness="0" 
                          Validation.ErrorTemplate="{StaticResource validationTemplate2}"
                          x:Name="PasswordBox" 
-                         MaxLength="25">
-                    <Binding Path="Jelszo" 
+                    MaxLength="25">
+                    
+                    
+                    <!--<Binding Path="Jelszo" 
                              UpdateSourceTrigger="PropertyChanged"
                              ValidatesOnDataErrors="True" >
                         <Binding.ValidationRules>
                             <validation:LoginValidator/>
                         </Binding.ValidationRules>
-                    </Binding>
-                </TextBox>
+                    </Binding>-->
+                </PasswordBox>
             </Border>
 
 
@@ -97,8 +102,8 @@
                     CommandParameter="LogIn"-->
                 </Button>
             </Border>
-
-            <TextBlock Text="Hibás felhasználónév vagy jelszó." FontSize="12" 
+            
+            <TextBlock Width="220" Margin="10" Padding="8" TextAlignment="Center" Text="Hibás felhasználónév vagy jelszó." FontSize="12" 
                        Validation.ErrorTemplate="{StaticResource validationTemplate2}"
                        Background="OrangeRed"
                        Visibility="{Binding ShowResult}"/>

@@ -30,8 +30,10 @@ namespace ItBolt.WPF
             services.AddTransient<BelepesViewModel>();
             services.AddTransient<AddBoltViewModel>();
             services.AddTransient<AddRaktarViewModel>();
+            services.AddTransient<AddEszkozViewModel>();
             services.AddTransient<BoltKimutatasViewModel>();
             services.AddTransient<RaktarKimutatasViewModel>();
+            services.AddTransient<EszkozKimutatasViewModel>();
             services.AddTransient<BoltKimutatasView>();
             services.AddTransient<AddBoltView>();
 
@@ -49,9 +51,14 @@ namespace ItBolt.WPF
                 return new PagerRepository<Bolt>("api/Boltok");
             });
 
+            services.AddTransient<IGenericRepository<Bolt>, GenericAPIRepository<Bolt>>(x =>
+            {
+                return new PagerRepository<Bolt>("api/Boltok");
+            });
+
             services.AddTransient<IGenericRepository<Raktar>, GenericAPIRepository<Raktar>>(x =>
             {
-                return new PagerRepository<Raktar>("api/Raktarak");
+                return new PagerRepository<Raktar>("api/Raktarok/RaktarokToList");
             });
 
             services.AddTransient<IPagerRepository<Raktar>, PagerRepository<Raktar>>(x =>
@@ -59,6 +66,22 @@ namespace ItBolt.WPF
                 return new PagerRepository<Raktar>("api/Raktarok");
             });
 
+            services.AddTransient<IPagerRepository<Eszkoz>, PagerRepository<Eszkoz>>(x =>
+            {
+                return new PagerRepository<Eszkoz>("api/Eszkozok");
+            });
+            services.AddTransient<IGenericRepository<Eszkoz>, GenericAPIRepository<Eszkoz>>(x =>
+            {
+                return new PagerRepository<Eszkoz>("api/Eszkozok");
+            });
+            services.AddTransient<IGenericRepository<Kategoria>, GenericAPIRepository<Kategoria>>(x =>
+            {
+                return new PagerRepository<Kategoria>("api/Kategoriak");
+            });
+            services.AddTransient<IGenericRepository<Gyarto>, GenericAPIRepository<Gyarto>>(x =>
+            {
+                return new PagerRepository<Gyarto>("api/Gyartok");
+            });
 
             return services.BuildServiceProvider();
         }

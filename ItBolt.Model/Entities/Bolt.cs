@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ItBolt.Model.Entities
 {
@@ -17,9 +18,9 @@ namespace ItBolt.Model.Entities
         [Column(TypeName = "int(11)")]
         public int boltID { get; set; }
         [Column(TypeName = "int(11)")]
-        public int raktarID { get; set; }
+        public int? raktarID { get; set; }
         [Column(TypeName = "int(11)")]
-        public int rendelesID { get; set; }
+        public int? rendelesID { get; set; }
         [StringLength(50)]
         public string? bolt_neve { get; set; }
         [StringLength(100)]
@@ -30,6 +31,7 @@ namespace ItBolt.Model.Entities
 
         [ForeignKey("raktarID")]
         [InverseProperty("raktarak")]
+        [JsonIgnore]
         public virtual Raktar? raktar { get; set; }
 
 

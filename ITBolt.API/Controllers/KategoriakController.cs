@@ -23,6 +23,13 @@ namespace ITBolt.API.Controllers
             _context = context;
         }
 
+        // GET: api/Kategoriak
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Kategoria>>> GetKategoriak()
+        {
+            return await _context.kategoria.OrderBy(x => x.kategoria_nev).ToListAsync();
+        }
+
         // GET: api/kategoriak/1
         [HttpGet("{kategoriaID}")]
         public async Task<ActionResult<Kategoria>> GetKategoria(int kategoriaID)

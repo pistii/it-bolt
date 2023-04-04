@@ -7,6 +7,9 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ItBolt.WPF.Commands;
 using System.Windows.Documents;
+using System;
+using System.Globalization;
+using System.Windows;
 
 namespace ItBolt.WPF.ViewModels
 {
@@ -69,6 +72,7 @@ namespace ItBolt.WPF.ViewModels
 
                 if (exists)
                 {
+
                     await _raktarRepo.UpdateAsync(raktar.raktarID, raktar);
                 }
             }
@@ -90,8 +94,11 @@ namespace ItBolt.WPF.ViewModels
 
         private async Task DeleteAsync(Raktar raktar)
         {
-            await _raktarRepo.DeleteAsync(raktar.raktarID);
-            Raktarak.Remove(raktar);
+            if (MessageBox.Show("Törlés", "Biztos benne?", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+            {
+                await _raktarRepo.DeleteAsync(raktar.raktarID);
+                Raktarak.Remove(raktar);
+            }
         }
     }
 }

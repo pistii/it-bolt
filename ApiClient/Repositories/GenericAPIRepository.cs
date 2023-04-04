@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Security;
 
 namespace ApiClient.Repositories
 {
@@ -19,6 +20,11 @@ namespace ApiClient.Repositories
             return responseMessage.IsSuccessStatusCode;
         }
 
+        public async Task<bool> ExistsByNameAndPw(string name, SecureString pw)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(_path + "/?nev=" + name + "&jelszo=" + pw);
+            return responseMessage.IsSuccessStatusCode;
+        }
         public async Task<bool> ExistsByNameAsync(string name)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(_path + "/" + name);

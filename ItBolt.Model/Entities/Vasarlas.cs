@@ -17,8 +17,9 @@ namespace ItBolt.Model.Entities
         public int rendelesID { get; set; }
         [StringLength(25)]
         public string? fizetesmod { get; set; } = null!;
+        //Todo
 
-        [JsonConverter(typeof(DateOnlyConverter))]
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly? vasarlas_datuma { get; set; } = null!;
         [StringLength(25)]
         public string? vasarlas_tipusa { get; set; } = null!;

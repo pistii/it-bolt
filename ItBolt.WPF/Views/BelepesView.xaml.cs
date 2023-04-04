@@ -17,9 +17,15 @@ namespace ItBolt.WPF.Views
             this.InitializeComponent();
 
             DataContext = App.Current.Services.GetRequiredService<BelepesViewModel>();
+        }
 
 
-
+        private void pwdBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword;
+                ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password;
+            }
         }
 
         public object ImageAwesome { get; internal set; }

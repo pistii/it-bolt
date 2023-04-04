@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using ItBolt.Model.Entities;
+using System.ComponentModel;
 
 namespace ITBolt.API.Data
 {
@@ -106,19 +107,23 @@ namespace ITBolt.API.Data
                 entity.HasOne(d => d.raktar)
                     .WithMany(p => p.raktarak)
                     .HasForeignKey(d => d.raktarID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("bolt_ibfk_1");
             });
+
 
             modelBuilder.Entity<Eszkoz>(entity =>
             {
                 entity.HasOne(d => d.gyarto)
                     .WithMany(p => p.eszkoz)
                     .HasForeignKey(d => d.gyartoID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("eszkoz_ibfk_2");
-
+                
                 entity.HasOne(d => d.kategoria)
                     .WithMany(p => p.eszkoz)
                     .HasForeignKey(d => d.kategoriaID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("eszkoz_ibfk_3");
             });
 

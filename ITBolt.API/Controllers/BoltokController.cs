@@ -40,9 +40,7 @@ namespace ITBolt.API.Controllers
                 query = query.Where(x =>
                     x.bolt_neve.ToLower().Contains(search) ||
                     x.nyitvatartasi_ido.ToLower().Contains(search) ||
-                    x.nyitvatartasi_ido.Equals(szam) ||
-                    x.bolt_cime.Contains(search) ||
-                    x.bolt_cime.Equals(szam));
+                    x.bolt_cime.Contains(search));
             }
 
             // Sorbarendezés
@@ -72,6 +70,7 @@ namespace ITBolt.API.Controllers
                 query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
             }
             var data = await query.ToListAsync();
+            
             return new TableDTO<Bolt>(data, totalItems);
         }
 
@@ -134,7 +133,7 @@ namespace ITBolt.API.Controllers
 //    "bolt_cime" : "Nagy Bolt",
 //    "nyitvatartasi_ido" : "H-P 8:00 - 16"
 //}
-    [HttpPost]
+        [HttpPost]
         public async Task<ActionResult<Bolt>> PostBoltok(Bolt bolt)
         {
 

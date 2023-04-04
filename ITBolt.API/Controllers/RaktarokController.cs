@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ITBolt.API.Data;
 using ItBolt.Model.Entities;
+using ItBolt.Model.DTOs;
 
 namespace ITBolt.API.Controllers
 {
@@ -20,6 +21,72 @@ namespace ITBolt.API.Controllers
         public RaktarokController(ITBoltContext context)
         {
             _context = context;
+        }
+
+        // GET: api/RaktarokToList
+        
+        [HttpGet]
+        [Route("RaktarokToList")]
+        public async Task<ActionResult<IEnumerable<Raktar>>> GetRaktarok()
+        {
+            return await _context.raktar.OrderBy(x => x.raktar_neve).ToListAsync();
+        }
+
+        // GET: api/Raktarok
+        [HttpGet]
+        public async Task<TableDTO<Raktar>> GetAll(
+            int page = 1,
+            int itemsPerPage = 20,
+            string? search = null,
+            string? sortBy = null,
+            bool ascending = true)
+        {
+            //név alapján rendezzük
+            var query = _context.raktar.OrderBy(x => x.raktar_neve).AsQueryable();
+            // Keresés
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                // Ha dátum
+                DateTime.TryParse(search, out DateTime datum);
+
+                query = query.Where(x =>
+                    x.raktar_neve.ToLower().Contains(search) ||
+                    x.raktar_helye.ToLower().Contains(search) ||
+                    x.Berlesi_ido.Equals(datum));
+            }
+
+            // Sorbarendezés
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                switch (sortBy)
+                {
+
+                    case "raktar_neve":
+                        query = ascending ? query.OrderBy(x => x.raktar_neve) : query.OrderByDescending(x => x.raktar_neve);
+                        break;
+                    case "raktar_helye":
+                        query = ascending ? query.OrderBy(x => x.raktar_helye) : query.OrderByDescending(x => x.raktar_helye);
+                        break;
+                    case "Berlesi_ido":
+                        query = ascending ? query.OrderBy(x => x.Berlesi_ido) : query.OrderByDescending(x => x.Berlesi_ido);
+                        break;
+                    default:
+                        query = ascending ? query.OrderBy(x => x.raktar_neve) : query.OrderByDescending(x => x.raktar_neve);
+                        break;
+                }
+            }
+
+            // Összes találat kiszámítása
+            int totalItems = await query.CountAsync();
+
+            // Oldaltördelés
+            if (page + itemsPerPage > 0)
+            {
+                query = query.Skip((page - 1) * itemsPerPage).Take(itemsPerPage);
+            }
+            var data = await query.ToListAsync();
+            return new TableDTO<Raktar>(data, totalItems);
         }
 
         // GET: api/raktarok/raktarID123

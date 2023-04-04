@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ItBolt.WPF.Views"
+             xmlns:local="clr-namespace:ItBolt.WPF.Views" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,12 +12,50 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Margin="20,50,20,0">
+        
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" TileMode="Tile" AlignmentX="Center" AlignmentY="Center" ImageSource="/Resources/md-row.png"></ImageBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Row="1" Margin="20,50,20,0">
             <Label FontSize="25">Üdvözlet az alkalmazásban!</Label>
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Center">
-            <Label>Válassz a lehetőségek közül a menü panelen.</Label>
+        
+        <Grid Grid.Row="2" HorizontalAlignment="Right" Margin="00,0,50,0" >
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="Auto" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <fa:ImageAwesome Icon="Wrench" Grid.ColumnSpan="3" Width="20" Height="20" Grid.Column="0"  Margin="0,0,200,0" HorizontalAlignment="Center"/>
+            <Label  Grid.ColumnSpan="3" HorizontalAlignment="Center" FontWeight="Bold">Újdonságok, változtatások:</Label>
+            <fa:ImageAwesome Icon="Wrench"  Grid.ColumnSpan="3" Width="20" Height="20" RenderTransformOrigin="0.5,0.5"  Margin="200,0,0,0" >
+                <fa:ImageAwesome.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </fa:ImageAwesome.RenderTransform>
+            </fa:ImageAwesome>
+
+            <Label  Grid.Row="1">● Hibajavítások</Label>
+            <Label  Grid.Row="2">● Bolt hozzáadás javítva</Label>
+            <Label  Grid.Row="3">● Felugró üzenet a bolt törlésekor</Label>
+            <Label  Grid.Row="4">● Mentés gombok javítva</Label>
         </Grid>
+        <Label  Grid.Row="666" Grid.Column="666" HorizontalAlignment="right" VerticalAlignment="Bottom">verzió 1.0</Label>
+
     </Grid>
 </UserControl>

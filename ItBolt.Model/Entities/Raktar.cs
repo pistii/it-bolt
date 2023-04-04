@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace ItBolt.Model.Entities
 {
@@ -16,10 +17,10 @@ namespace ItBolt.Model.Entities
         [Column(TypeName = "int(11)")]
         public int raktarID { get; set; }
         [StringLength(50)]
-        public string? raktar_neve { get; set; }
+        public string raktar_neve { get; set; }
         [StringLength(100)]
-        public string? raktar_helye { get; set; }
-        public DateOnly? Berlesi_ido { get; set; }
+        public string raktar_helye { get; set; }
+        public DateTime? Berlesi_ido { get; set; }
 
         [InverseProperty("raktar")]
         public virtual ICollection<Bolt> raktarak { get; set; }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ItBolt.Model.Entities;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +19,14 @@ using System.Windows.Shapes;
 namespace ItBolt.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for AddRaktarView.xaml
+    /// Interaction logic for AddEszkozView.xaml
     /// </summary>
-    public partial class AddRaktarView : UserControl
+    public partial class AddEszkozView : UserControl
     {
-        public AddRaktarView()
+        public AddEszkozView()
         {
             InitializeComponent();
         }
-
-        private void txtRaktarBerles_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
+
