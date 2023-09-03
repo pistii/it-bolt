@@ -1,0 +1,86 @@
+﻿<Window x:Class="ItBolt.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ItBolt.WPF"
+        xmlns:vm="clr-namespace:ItBolt.WPF.ViewModels" xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="IT Bolt App" Height="800" Width="1200"
+        Background="AliceBlue"
+        AllowsTransparency="False"
+       Icon="/Resources/icon.jpg"
+        >
+
+    <!--Background="Transparent"
+        AllowsTransparency="False"-->
+
+    
+    <Border>
+        <!--CornerRadius="30"
+            BorderBrush="MediumAquamarine"
+            Background="#1b1448"
+            BorderThickness="5"-->
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border  CornerRadius="10" Background="#1b6874" Margin="10,1,10,0">
+                <Menu Margin="30,0,30,0" Background="Transparent">
+                    
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <DockPanel HorizontalAlignment="Stretch"/>
+
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Header="{Binding Log}" 
+                              Command="{Binding UpdateViewCommand}"
+                              CommandParameter="LogOut" 
+                              Padding="10,0,10,0" 
+                              BorderThickness="2" 
+                              FontWeight="DemiBold" 
+                              ItemsSource="{Binding SelectedViewModel, 
+                                            Mode=TwoWay, 
+                                            UpdateSourceTrigger=PropertyChanged}" >
+                    </MenuItem>
+                    <MenuItem Foreground="LightYellow"  Header="Új..."  Padding="10,0,10,0" 
+                              IsEnabled="{Binding EnabledButton}">
+                        <MenuItem Foreground="Black" Header="Bolt" Command="{Binding UpdateViewCommand}" CommandParameter="AddBolt" />
+                        <MenuItem Foreground="Black" Header="Raktár" Command="{Binding UpdateViewCommand}" CommandParameter="AddRaktar" />
+                        <!--<MenuItem Header="Leltár Eszköz" x:Name="UjLeltarEszkoz" />-->
+                        <MenuItem Foreground="Black" Header="Eszköz" Command="{Binding UpdateViewCommand}" CommandParameter="AddEszkoz"
+                                  x:Name="UjEszkoz"/>
+                        <!--<MenuItem Header="Gyártó" x:Name="UjGyarto" />
+                        <MenuItem Header="Kategória" x:Name="UjKategoria" />
+                        <MenuItem Header="Vásárló" x:Name="UjVasarlo" />
+                        <MenuItem Header="Vásárlás" x:Name="UjVasarlas" />-->
+                    </MenuItem>
+
+                    <MenuItem Foreground="LightYellow" Header="Kimutatás..."  Padding="10,0,10,0" IsEnabled="{Binding EnabledButton}">
+                        <MenuItem Foreground="Black" Header="Eszközökről"  Command="{Binding UpdateViewCommand}" CommandParameter="EszkozKimutatas"/>
+                        <MenuItem Foreground="Black" Header="Boltokról" Command="{Binding UpdateViewCommand}" CommandParameter="BoltKimutatas" />
+                        <!--<MenuItem Header="Vásárlókról" />-->
+                        <MenuItem Foreground="Black" Header="Raktárakról" Command="{Binding UpdateViewCommand}" CommandParameter="RaktarKimutatas" />
+                    </MenuItem>
+
+                    <MenuItem HorizontalAlignment="Right" Command="{Binding QuitCmd}">
+                        <MenuItem.Icon >
+                            <fa:ImageAwesome Icon="SignOut" HorizontalAlignment="Right"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </Menu>
+
+            </Border>
+
+            <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
+        </Grid>
+    </Border>
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+</Window>

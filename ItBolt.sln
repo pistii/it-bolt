@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITBolt.API", "ITBolt.API\ITBolt.API.csproj", "{1A4A813E-5166-4C0A-A7B2-54CE25D83ABC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5CA18B76-F675-4B31-A981-342A1A8A1922} = {5CA18B76-F675-4B31-A981-342A1A8A1922}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItBolt.Model", "ItBolt.Model\ItBolt.Model.csproj", "{5CA18B76-F675-4B31-A981-342A1A8A1922}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItBolt.WPF", "ItBolt.WPF\ItBolt.WPF.csproj", "{E0D427B6-64ED-4B92-97FD-4453DE893D14}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5CA18B76-F675-4B31-A981-342A1A8A1922} = {5CA18B76-F675-4B31-A981-342A1A8A1922}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiClient", "ApiClient\ApiClient.csproj", "{F5842F69-E519-4868-B90A-1E4D5CD2A328}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A4A813E-5166-4C0A-A7B2-54CE25D83ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A4A813E-5166-4C0A-A7B2-54CE25D83ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A4A813E-5166-4C0A-A7B2-54CE25D83ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A4A813E-5166-4C0A-A7B2-54CE25D83ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA18B76-F675-4B31-A981-342A1A8A1922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA18B76-F675-4B31-A981-342A1A8A1922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA18B76-F675-4B31-A981-342A1A8A1922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA18B76-F675-4B31-A981-342A1A8A1922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D427B6-64ED-4B92-97FD-4453DE893D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D427B6-64ED-4B92-97FD-4453DE893D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D427B6-64ED-4B92-97FD-4453DE893D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D427B6-64ED-4B92-97FD-4453DE893D14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5842F69-E519-4868-B90A-1E4D5CD2A328}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00D517FF-6B55-471C-8634-31A0D4E833E7}
+	EndGlobalSection
+EndGlobal

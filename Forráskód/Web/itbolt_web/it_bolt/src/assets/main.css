@@ -1,0 +1,94 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #1b6874;
+  color: #f7f3f3;
+  
+}
+
+h3, p, div {
+  color: #f7f3f3;
+}
+
+.loginBtn {
+  margin-top: 16px;
+}
+
+tr {
+  border-bottom: 3px solid black;
+  border-collapse: collapse;
+}
+
+.deselectBtn {
+  color: black;
+  font-weight: 500;
+}
+
+.totalText {
+  text-align: left;
+  margin-inline: 30px;
+  margin-bottom: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  display: inline-block;
+}
+
+.secondaryBtnContainer {
+  text-align: right;
+}
+
+
+@media screen and (min-width: 200px ) {
+  .loginContainer {
+    background-color: #205861;
+    padding-block: 4%;
+    border-radius: 5rem;
+    margin-inline: 10%;
+  }
+
+  #username {
+    width: fit-content;
+    padding-inline: auto;
+    margin: auto;
+
+  }
+  #password {
+    width: fit-content;
+    margin: auto;
+
+  }
+}
+
+
+@media screen and (min-width: 800px) {
+  .loginContainer {
+
+    width: 600px;
+    margin: auto;
+    background-color: #205861;
+    border-radius: 5rem;
+  }
+  
+  #username {
+    margin: auto;
+    padding-inline: auto;
+    
+  }
+  #password {
+    margin: auto;
+    width: fit-content;
+  }
+}
+
+
+
+/* 
+.ag-theme-alpine {
+  --ag-foreground-color: rgb(0, 0, 0);
+  --ag-background-color: rgb(28, 71, 87);
+  --ag-header-foreground-color: rgb(255, 255, 255);
+  --ag-header-background-color: rgba(63, 64, 95, 0.308);
+  --ag-odd-row-background-color: rgba(0, 0, 0, 0.073);
+
+  --ag-font-size: 20px;
+  --ag-font-family: monospace;
+} */

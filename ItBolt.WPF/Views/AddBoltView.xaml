@@ -1,0 +1,168 @@
+﻿<UserControl x:Class="ItBolt.WPF.Views.AddBoltView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ItBolt.WPF.Views" 
+             xmlns:viewmodels="clr-namespace:ItBolt.WPF.ViewModels" 
+             xmlns:v="clr-namespace:ItBolt.WPF.Validators"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddBoltViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="AliceBlue"
+             >
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*"  />
+            </Grid.ColumnDefinitions>
+            <Label FontSize="20" HorizontalAlignment="Center" Content=" Új bolt hozzáadása" Grid.Row="0" Margin="0,0,30,30" />
+
+
+            <Label Content="Bolt neve: " Grid.Row="1" Grid.Column="0" Margin="50,5,0,0" />
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txt_BoltNev" Margin="0,0,0,25" Padding="5,3,5,0" Height="25" MaxLength="50">
+                <TextBox.Text>
+                    <Binding Path="SelectedBolt.bolt_neve"  UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules>
+                            <v:BoltValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            
+            <Label Content="Bolt címe: " Grid.Row="2" Grid.Column="0" Margin="50,0,0,25"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtBoltCim" Margin="0,0,0,25" Padding="5,3,5,0" Height="25" MaxLength="100">
+                <TextBox.Text>
+                    <Binding Path="SelectedBolt.bolt_cime"  UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" >
+                        <Binding.ValidationRules>
+                            <v:BoltValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Label Content="Bolt nyitvatartási idő: " Grid.Row="3" Grid.Column="0" Margin="50,0,0,25"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtNyitvatartas" Margin="0,0,0,25" Padding="5,3,5,0" Height="25" MaxLength="15">
+                <TextBox.Text>
+                    <Binding Path="SelectedBolt.nyitvatartasi_ido"  UpdateSourceTrigger="PropertyChanged" />
+                </TextBox.Text>
+
+            </TextBox>
+            <Separator  Grid.Row="4" Grid.Column="0" />
+            <Separator  Grid.Row="4" Grid.Column="1" />
+
+            <Grid Grid.Row="5" Grid.ColumnSpan="3">
+                
+            <Expander Header="Bolthoz tartozó raktár, ha van" Margin="0,-25,0,0" >
+                <Grid Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Label HorizontalAlignment="Left" Content="Raktár neve: " Grid.Row="1" Grid.Column="0" Margin="50,5,0,0" />
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtRaktarNeve"  Margin="0,0,0,25" Padding="5,3,5,0" Height="25" >
+                        <TextBox.Text>
+                            <Binding Path="SelectedRaktar.raktar_neve"  UpdateSourceTrigger="PropertyChanged" />
+                            
+                        </TextBox.Text>
+                           
+                        </TextBox>
+                    <Label Content="Raktár címe: " Grid.Row="2" Grid.Column="0" Margin="50,0,0,0" />
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtRaktarHely"  Margin="0,0,0,25" Padding="5,3,5,0" Height="25" IsEnabled="True"  >
+                            <TextBox.Text>
+                                <Binding Path="SelectedRaktar.raktar_helye"  UpdateSourceTrigger="PropertyChanged"  />
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <Label Content="Raktár bérlési ideje: " Grid.Row="3" Grid.Column="0" Margin="50,0,0,0" />
+                        <DatePicker Grid.Row="3" Grid.Column="1"  x:Name="txtRaktarBerles" Margin="0,0,0,25" Padding="5,3,5,0" Height="25" IsEnabled="true" 
+                    SelectedDate="{Binding Path=SelectedRaktar.Berlesi_ido, StringFormat='yyyy-MM-dd'}"/>
+
+                        <Separator  Grid.Row="4" Grid.Column="0" Margin="50,0,0,0" />
+                    <Separator  Grid.Row="4" Grid.Column="1" />-->
+
+                        <Label Content="Raktár keresése: " Grid.Row="5" Grid.Column="0" Margin="50,5,0,0" />
+                        <ComboBox Grid.Row="5" Grid.Column="1" Width="300" 
+                        HorizontalAlignment="Left" Margin="0,5,0,25"
+                        ItemsSource="{Binding Raktarak}"
+                        SelectedItem="{Binding SelectedBolt.raktar}"
+                        SelectedValue="{Binding SelectedBolt.raktarID}"
+                        DisplayMemberPath="raktar_neve"
+                        SelectedValuePath="raktarID" 
+                                  
+                                  >
+                            <ComboBox.Style>
+                                <Style TargetType="ComboBox" >
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtRaktarNeve}"
+                                     Value="0">
+                                            <Setter Property="IsEnabled" Value="true"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=txtRaktarHely}"
+                                     Value="0">
+                                            <Setter Property="IsEnabled" Value="true"/>
+                                        </DataTrigger>
+                                        
+                                    </Style.Triggers>
+                                    <Setter Property="IsEnabled" Value="true" />
+                                </Style>
+                            </ComboBox.Style>
+                        </ComboBox>
+                    </Grid>
+            </Expander>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="2" Width="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Mentés" Grid.Row="0" Grid.Column="0"
+                Command="{Binding SaveCmdAsync}" CommandParameter="{Binding SelectedBolt}" Height="30" Width="100"  >
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" >
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=txtBoltNev}"
+                                     Value="0">
+                                    <Setter Property="IsEnabled" Value="false"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=txtBoltCim}"
+                                     Value="0">
+                                    <Setter Property="IsEnabled" Value="false"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Nulláz" Grid.Row="0" Grid.Column="1" Height="30" Width="100" Command="{Binding NewCmd}"/>
+            </Grid>
+            <Label Grid.Column="2" Content="{Binding ShowUploadResult}" HorizontalAlignment="Left" MaxWidth="100"  Visibility="{Binding ShowUploadResultVis}" FontWeight="Bold" Foreground="Green"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
